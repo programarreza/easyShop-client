@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import { ReactNode, SVGProps } from "react";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -19,3 +19,14 @@ export type TUser = {
   iat: number;
   exp: number;
 };
+
+export interface IInput {
+  variant?: "bordered" | "flat" | "faded" | "underlined";
+  size?: "md" | "sm" | "lg";
+  required?: boolean;
+  type?: "text" | "email" | "password" | "number";
+  label?: ReactNode;
+  name: string;
+  placeholder?: string;
+  disabled?: boolean;
+}

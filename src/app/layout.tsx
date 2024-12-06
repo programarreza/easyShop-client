@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { Metadata, Viewport } from "next";
 import { Navbar } from "../components/Home/Navbar/Navbar";
 import { Providers } from "../lib/Providers";
+import StoreProvider from "./StoreProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -38,13 +39,13 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen">
-            <Navbar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-              {children}
-            </main>
-          </div>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
+          <StoreProvider>
+            <div className="relative flex flex-col h-screen">
+              <Navbar />
+              <div className="min-h-screen">{children}</div>
+            </div>
+          </StoreProvider>
         </Providers>
       </body>
     </html>

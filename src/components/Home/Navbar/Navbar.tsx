@@ -8,7 +8,7 @@ import {
 } from "@nextui-org/navbar";
 import { link as linkStyles } from "@nextui-org/theme";
 import clsx from "clsx";
-import { default as NextLink } from "next/link";
+import Link, { default as NextLink } from "next/link";
 import { useEffect, useState } from "react";
 
 // import NavbarDropdown from "./NavbarDropdown";
@@ -61,7 +61,7 @@ export const Navbar = () => {
 
   return (
     <div
-      className={`text-white fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out ${
+      className={` fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out ${
         scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"
       }`}
       style={{ backdropFilter: "blur(10px)" }}
@@ -80,13 +80,13 @@ export const Navbar = () => {
         </NavbarContent>
         <NavbarBrand as="li" className=" max-w-fit">
           {/* content-2 */}
-          <div className="navbar-end text-white flex items-center gap-8 font-medium text-lg ">
+          <div className="navbar-end  flex items-center gap-8 font-medium text-lg ">
             <ul className="hidden lg:flex gap-4 justify-start ml-2">
               {siteConfig.navItems.map((item) => (
                 <NavbarItem key={item.href}>
                   <NextLink
                     className={clsx(
-                      "text-white mt-2", // Default text color set to white
+                      " mt-2", // Default text color set to white
                       linkStyles({ color: "foreground" }),
                       "data-[active=true]:text-primary data-[active=true]:font-medium"
                     )}
@@ -103,7 +103,9 @@ export const Navbar = () => {
                   {/* <p>My dashboard</p> <NavbarDropdown />{" "} */}
                 </div>
               ) : (
-                <p className="mt-2">login</p>
+                <Link href={"/login"}>
+                  <p className="mt-2 cursor-pointer">login</p>
+                </Link>
               )}
               {/* </Link> */}
             </ul>
