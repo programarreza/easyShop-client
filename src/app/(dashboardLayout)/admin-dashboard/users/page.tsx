@@ -1,4 +1,5 @@
 "use client";
+import StatusChangeModal from "@/src/components/modals/StatusChangeModal";
 import {
   useDeleteUserMutation,
   useGetUsersQuery,
@@ -90,7 +91,22 @@ const UsersPage = () => {
               {/* <TableCell>{user?.address}</TableCell> */}
               <TableCell>{user?.status}</TableCell>
               <TableCell>{user?.role}</TableCell>
-              <TableCell>status change</TableCell>
+              <TableCell>
+                {/* Change Status */}
+                <Tooltip
+                  content="Change Status"
+                  className=""
+                >
+                  <button className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                    <StatusChangeModal
+                      status={user?.status}
+                      userId={user?.id}
+                      buttonText="status change"
+                      title=""
+                    />
+                  </button>
+                </Tooltip>
+              </TableCell>
               <TableCell>role change</TableCell>
               <TableCell>
                 {/* Delete user */}

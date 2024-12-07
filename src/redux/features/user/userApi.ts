@@ -27,8 +27,22 @@ export const authApi = baseApi.injectEndpoints({
 
       invalidatesTags: ["users"],
     }),
+
+    statusChange: builder.mutation({
+      query: (args) => ({
+        url: `/users/change-status/${args.userId}`,
+        method: "PATCH",
+        body: args.status,
+      }),
+
+      invalidatesTags: ["users"],
+    }),
   }),
 });
 
-export const { useGetProfileQuery, useGetUsersQuery, useDeleteUserMutation } =
-  authApi;
+export const {
+  useGetProfileQuery,
+  useGetUsersQuery,
+  useDeleteUserMutation,
+  useStatusChangeMutation,
+} = authApi;
