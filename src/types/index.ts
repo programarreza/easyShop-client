@@ -30,3 +30,10 @@ export interface IInput {
   placeholder?: string;
   disabled?: boolean;
 }
+
+export type TCategories = {
+  id: string;
+  name: string;
+  description: string;
+  images: string;
+};

@@ -9,7 +9,7 @@ const DashboardSidebar = () => {
 
   return (
     <div>
-      <div className="w-full min-h-screen">
+      <div className="w-full min-h-screen ">
         <Tabs
           isVertical={true}
           aria-label="Options"

@@ -9,7 +9,30 @@ export const categoriesApi = baseApi.injectEndpoints({
         body: categoryInfo,
       }),
     }),
+
+    getCategories: builder.query({
+      query: () => ({
+        url: "/categories",
+        method: "GET",
+      }),
+
+      providesTags: ["categories"],
+    }),
+
+    updateCategory: builder.mutation({
+      query: (categoryInfo) => ({
+        url: `/categories/${categoryInfo.categoryId}`,
+        method: "PATCH",
+        body: categoryInfo.categoryData,
+      }),
+
+      invalidatesTags: ["categories"],
+    }),
   }),
 });
 
-export const { useCreateCategoryMutation } = categoriesApi;
+export const {
+  useCreateCategoryMutation,
+  useGetCategoriesQuery,
+  useUpdateCategoryMutation,
+} = categoriesApi;
