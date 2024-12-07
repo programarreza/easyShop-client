@@ -11,15 +11,13 @@ import clsx from "clsx";
 import Link, { default as NextLink } from "next/link";
 import { useEffect, useState } from "react";
 
-// import NavbarDropdown from "./NavbarDropdown";
-
 import { Logo } from "@/src/components/icons";
 import { siteConfig } from "@/src/config/site";
-// import useLoggedUser from "@/src/hooks/auth.hook";
+import useLoggedUser from "@/src/hooks/auth.hook";
+import NavbarDropdown from "./NavbarDropdown";
 
 export const Navbar = () => {
-  // const loggedUser = useLoggedUser();
-  const loggedUser = false;
+  const loggedUser = useLoggedUser();
   const [isOpen, setIsOpen] = useState(false);
   const [scrollDirection, setScrollDirection] = useState("up");
 
@@ -47,16 +45,16 @@ export const Navbar = () => {
   }, [scrollDirection]);
 
   const getDashboardLink = () => {
-    // switch (loggedUser?.role as unknown as "ADMIN" | "MANAGER" | "USER") {
-    //   case "ADMIN":
-    //     return "/admin-dashboard";
-    //   case "MANAGER":
-    //     return "/manager-dashboard";
-    //   case "USER":
-    //     return "/dashboard";
-    //   default:
-    //     return "/login"; // Redirect to login if no role matches
-    // }
+    switch (loggedUser?.role as unknown as "ADMIN" | "VENDOR" | "CUSTOMER") {
+      case "ADMIN":
+        return "/admin-dashboard";
+      case "VENDOR":
+        return "/vendor-dashboard";
+      case "CUSTOMER":
+        return "/dashboard";
+      default:
+        return "/login"; // Redirect to login if no role matches
+    }
   };
 
   return (
@@ -97,17 +95,17 @@ export const Navbar = () => {
                   </NextLink>
                 </NavbarItem>
               ))}
-              {/* <Link href={getDashboardLink()}> */}
-              {loggedUser ? (
-                <div className="flex justify-center items-center gap-2">
-                  {/* <p>My dashboard</p> <NavbarDropdown />{" "} */}
-                </div>
-              ) : (
-                <Link href={"/login"}>
-                  <p className="mt-2 cursor-pointer">login</p>
-                </Link>
-              )}
-              {/* </Link> */}
+              <Link href={getDashboardLink()}>
+                {loggedUser ? (
+                  <div className="flex justify-center items-center gap-2">
+                    <p>My dashboard</p> <NavbarDropdown />{" "}
+                  </div>
+                ) : (
+                  <Link href={"/login"}>
+                    <p className="mt-2 cursor-pointer">login</p>
+                  </Link>
+                )}
+              </Link>
             </ul>
           </div>
         </NavbarBrand>
