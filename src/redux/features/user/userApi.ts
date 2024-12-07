@@ -10,7 +10,7 @@ export const authApi = baseApi.injectEndpoints({
 
       providesTags: ["profile"],
     }),
-    
+
     getUsers: builder.query({
       query: () => ({
         url: `/users`,
@@ -18,7 +18,17 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
+
+    deleteUser: builder.mutation({
+      query: (userId) => ({
+        url: `/users/${userId}`,
+        method: "DELETE",
+      }),
+
+      invalidatesTags: ["users"],
+    }),
   }),
 });
 
-export const { useGetProfileQuery, useGetUsersQuery } = authApi;
+export const { useGetProfileQuery, useGetUsersQuery, useDeleteUserMutation } =
+  authApi;
