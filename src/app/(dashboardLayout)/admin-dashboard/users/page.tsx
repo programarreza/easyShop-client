@@ -1,4 +1,5 @@
 "use client";
+import RoleChangeModal from "@/src/components/modals/RoleChangeModal";
 import StatusChangeModal from "@/src/components/modals/StatusChangeModal";
 import {
   useDeleteUserMutation,
@@ -93,10 +94,7 @@ const UsersPage = () => {
               <TableCell>{user?.role}</TableCell>
               <TableCell>
                 {/* Change Status */}
-                <Tooltip
-                  content="Change Status"
-                  className=""
-                >
+                <Tooltip content="Change Status" className="">
                   <button className="text-lg text-default-400 cursor-pointer active:opacity-50">
                     <StatusChangeModal
                       status={user?.status}
@@ -107,7 +105,23 @@ const UsersPage = () => {
                   </button>
                 </Tooltip>
               </TableCell>
-              <TableCell>role change</TableCell>
+              <TableCell>
+                {" "}
+                {/* Change Role */}
+                <Tooltip
+                  content="Change Role"
+                  className=""
+                >
+                  <button className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                    <RoleChangeModal
+                      role={user?.role}
+                      userId={user?.id}
+                      buttonText="role change"
+                      title=""
+                    />
+                  </button>
+                </Tooltip>
+              </TableCell>
               <TableCell>
                 {/* Delete user */}
                 <Tooltip color="danger" content="Delete user">
