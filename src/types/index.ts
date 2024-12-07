@@ -37,3 +37,14 @@ export type TCategories = {
   description: string;
   images: string;
 };
+
+
+export type IUser = {
+  id: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  profilePhoto: string;
+  status: TUserStatus;
+  role: TUserRole;
+};

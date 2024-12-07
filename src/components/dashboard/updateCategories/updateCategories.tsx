@@ -33,9 +33,7 @@ const UpdateCategories = ({ category }: any) => {
         description: data.description,
       };
 
-	  console.log({jsonData})
-
-      formData.append("data", JSON.stringify(jsonData));
+	  formData.append("data", JSON.stringify(jsonData));
 
       if (data.image) {
         formData.append("image", data.image);
@@ -47,8 +45,6 @@ const UpdateCategories = ({ category }: any) => {
         categoryData: formData,
         categoryId: category?.id,
       };
-
-	  console.log({args})
 
       const res = await updateCategory(args).unwrap();
       if (res?.success) {

@@ -10,7 +10,15 @@ export const authApi = baseApi.injectEndpoints({
 
       providesTags: ["profile"],
     }),
+    
+    getUsers: builder.query({
+      query: () => ({
+        url: `/users`,
+        method: "GET",
+      }),
+      providesTags: ["users"],
+    }),
   }),
 });
 
-export const { useGetProfileQuery } = authApi;
+export const { useGetProfileQuery, useGetUsersQuery } = authApi;
