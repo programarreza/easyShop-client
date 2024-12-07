@@ -11,10 +11,11 @@ import clsx from "clsx";
 import Link, { default as NextLink } from "next/link";
 import { useEffect, useState } from "react";
 
+import NavbarDropdown from "./NavbarDropdown";
+
 import { Logo } from "@/src/components/icons";
 import { siteConfig } from "@/src/config/site";
 import useLoggedUser from "@/src/hooks/auth.hook";
-import NavbarDropdown from "./NavbarDropdown";
 
 export const Navbar = () => {
   const loggedUser = useLoggedUser();
@@ -86,7 +87,7 @@ export const Navbar = () => {
                     className={clsx(
                       " mt-2", // Default text color set to white
                       linkStyles({ color: "foreground" }),
-                      "data-[active=true]:text-primary data-[active=true]:font-medium"
+                      "data-[active=true]:text-primary data-[active=true]:font-medium",
                     )}
                     color="foreground"
                     href={item.href}

@@ -1,11 +1,15 @@
 import { fontSans } from "@/src/config/fonts";
 import { siteConfig } from "@/src/config/site";
+
 import "@/src/styles/globals.css";
 import clsx from "clsx";
 import { Metadata, Viewport } from "next";
+
 import { Navbar } from "../components/Home/Navbar/Navbar";
 import { Providers } from "../lib/Providers";
+
 import StoreProvider from "./StoreProvider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: {
@@ -36,13 +40,14 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <StoreProvider>
             <div className="relative flex flex-col h-screen">
               <Navbar />
+              <Toaster />
               <div className="min-h-screen">{children}</div>
             </div>
           </StoreProvider>

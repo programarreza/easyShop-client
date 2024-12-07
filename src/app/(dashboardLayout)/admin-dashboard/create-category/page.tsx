@@ -1,12 +1,13 @@
 "use client";
 
-import RWForm from "@/src/components/form/RWForm";
-import RWInput from "@/src/components/form/RWInput";
-import { useCreateCategoryMutation } from "@/src/redux/features/categories/categoriesApi";
 import { Input } from "@nextui-org/input";
 import { useRouter } from "next/navigation";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
+
+import { useCreateCategoryMutation } from "@/src/redux/features/categories/categoriesApi";
+import RWInput from "@/src/components/form/RWInput";
+import RWForm from "@/src/components/form/RWForm";
 
 const CreateCategoryPage = () => {
   const [createCategory, { isLoading }] = useCreateCategoryMutation();
@@ -26,6 +27,7 @@ const CreateCategoryPage = () => {
       formData.append("image", data.image);
 
       const res = await createCategory(formData).unwrap();
+
       if (res?.success) {
         toast.success(res?.message, { id: toastId, duration: 1000 });
         router.push("/admin-dashboard/categories");
@@ -53,13 +55,13 @@ const CreateCategoryPage = () => {
                 <RWForm onSubmit={onSubmit}>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="py-1">
-                      <RWInput name="name" type="text" label="Name" />
+                      <RWInput label="Name" name="name" type="text" />
                     </div>
                     <div className="py-1">
                       <RWInput
+                        label="Description"
                         name="description"
                         type="text"
-                        label="Description"
                       />
                     </div>
                   </div>
@@ -68,14 +70,14 @@ const CreateCategoryPage = () => {
                       name="image"
                       render={({ field: { onChange, value, ...field } }) => (
                         <Input
-                          type="file"
                           required
+                          type="file"
                           value={value?.fileName}
                           {...field}
-                          onChange={(e) => onChange(e.target.files?.[0])}
                           className=" bg-none bg-transparent cursor-pointer w-full border p-1 mt-3 border-dashed "
-                          radius="none"
                           label="Select Category Image"
+                          radius="none"
+                          onChange={(e) => onChange(e.target.files?.[0])}
                         />
                       )}
                     />

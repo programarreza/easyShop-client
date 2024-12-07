@@ -37,6 +37,7 @@ export const makeStore = () => {
   });
 
   const persistor = persistStore(store);
+
   return { store, persistor };
 };
 

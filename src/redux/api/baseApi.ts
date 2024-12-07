@@ -7,6 +7,7 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 import { toast } from "sonner";
+
 import { logout, setUser } from "../features/auth/authSlice";
 import { RootState } from "../store/store";
 
@@ -64,7 +65,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
           setUser({
             user,
             token: data.data.accessToken,
-          })
+          }),
         );
         result = await baseQuery(args, api, extraOptions);
       } else {
@@ -81,6 +82,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["profile", "categories", "users"],
+  tagTypes: ["profile", "categories", "users", "shops"],
   endpoints: () => ({}),
 });

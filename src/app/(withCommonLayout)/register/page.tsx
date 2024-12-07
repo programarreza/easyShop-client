@@ -1,15 +1,16 @@
 "use client";
 
-import RWForm from "@/src/components/form/RWForm";
-import RWInput from "@/src/components/form/RWInput";
-import { useRegisterMutation } from "@/src/redux/features/auth/authApi";
-import registerValidationSchema from "@/src/schemas/register.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@nextui-org/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
+
+import registerValidationSchema from "@/src/schemas/register.schema";
+import { useRegisterMutation } from "@/src/redux/features/auth/authApi";
+import RWInput from "@/src/components/form/RWInput";
+import RWForm from "@/src/components/form/RWForm";
 
 const RegisterPage = () => {
   const [register] = useRegisterMutation();
@@ -32,6 +33,7 @@ const RegisterPage = () => {
       formData.append("image", data.profilePhoto);
 
       const res = await register(formData).unwrap();
+
       if (res?.success) {
         toast.success(res?.message, { id: toastId, duration: 1000 });
         router.push("/login");
@@ -63,40 +65,40 @@ const RegisterPage = () => {
                 >
                   <div className="grid grid-cols-2 gap-3">
                     <div className="py-1">
-                      <RWInput name="name" type="text" label="Name" />
+                      <RWInput label="Name" name="name" type="text" />
                     </div>
                     <div className="py-1">
-                      <RWInput name="email" type="email" label="Email" />
+                      <RWInput label="Email" name="email" type="email" />
                     </div>
                     <div className="py-1">
                       <RWInput
+                        label="Mobile Number"
                         name="phoneNumber"
                         type="text"
-                        label="Mobile Number"
                       />
                     </div>
                     <div className="py-1">
                       <RWInput
+                        label="Password"
                         name="password"
                         type="password"
-                        label="Password"
                       />
                     </div>
                     <div className="py-1 mt-2">
-                      <RWInput name="address" type="text" label="Address" />
+                      <RWInput label="Address" name="address" type="text" />
                     </div>
                     <div className="py-1">
                       <Controller
                         name="profilePhoto"
                         render={({ field: { onChange, value, ...field } }) => (
                           <Input
-                            type="file"
                             required
+                            type="file"
                             value={value?.fileName}
                             {...field}
-                            onChange={(e) => onChange(e.target.files?.[0])}
                             className=" bg-none bg-transparent cursor-pointer"
                             label="Select profile photo"
+                            onChange={(e) => onChange(e.target.files?.[0])}
                           />
                         )}
                       />

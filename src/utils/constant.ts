@@ -19,4 +19,3 @@ export const usersRows = [
   { name: "ACTION", uid: "action" }, // role change
   { name: "ACTION", uid: "action" }, // delete
 ];
-

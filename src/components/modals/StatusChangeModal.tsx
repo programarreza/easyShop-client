@@ -1,5 +1,3 @@
-import statusChangeIcon from "@/src/assets/images/block_status.png";
-import { useStatusChangeMutation } from "@/src/redux/features/user/userApi";
 import { Button } from "@nextui-org/button";
 import {
   Modal,
@@ -11,6 +9,9 @@ import { Select, SelectItem } from "@nextui-org/select";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
+
+import { useStatusChangeMutation } from "@/src/redux/features/user/userApi";
+import statusChangeIcon from "@/src/assets/images/block_status.png";
 
 const statusFiled = [
   { key: "ACTIVE", label: "Active" },
@@ -36,9 +37,10 @@ const StatusChangeModal = ({ status, userId }: any) => {
       userId: userId,
     };
 
-	console.log({args})
+    console.log({ args });
 
     const res = await changeStatus(args).unwrap();
+
     if (res?.success) {
       toast.success(res?.message, { id: toastId, duration: 1000 });
       onClose();
@@ -49,17 +51,17 @@ const StatusChangeModal = ({ status, userId }: any) => {
     <>
       <Button className="bg-transparent " size="sm" onPress={onOpen}>
         <Image
-          src={statusChangeIcon}
           alt="status change icon"
           height={30}
+          src={statusChangeIcon}
           width={30}
         />
       </Button>
       <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
         className="bg-white"
+        isOpen={isOpen}
         size="md"
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
@@ -71,12 +73,12 @@ const StatusChangeModal = ({ status, userId }: any) => {
                 </div>
                 <div className="pb-4 ">
                   <Select
+                    className=""
+                    defaultSelectedKeys={[status]}
                     items={statusFiled}
                     label="Select new status"
-                    className=""
-                    variant="bordered"
                     selectedKeys={selectedValue}
-                    defaultSelectedKeys={[status]}
+                    variant="bordered"
                     onSelectionChange={(keys) =>
                       setSelectedValue(Array.from(keys) as string[])
                     }
@@ -87,8 +89,8 @@ const StatusChangeModal = ({ status, userId }: any) => {
                   </Select>
 
                   <button
-                    onClick={() => handleStatusChange()}
                     className="w-full py-3 my-4 px-6 border rounded-lg hover:bg-gray-200"
+                    onClick={() => handleStatusChange()}
                   >
                     Submit Now
                   </button>

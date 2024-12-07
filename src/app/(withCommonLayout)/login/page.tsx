@@ -1,5 +1,11 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
+
 import RWForm from "@/src/components/form/RWForm";
 import RWInput from "@/src/components/form/RWInput";
 import { useLoginMutation } from "@/src/redux/features/auth/authApi";
@@ -8,11 +14,6 @@ import { useAppDispatch } from "@/src/redux/hooks";
 import loginValidationSchema from "@/src/schemas/login.schema";
 import { TUser } from "@/src/types";
 import { verifyToken } from "@/src/utils/verifyToken";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { FieldValues, SubmitHandler } from "react-hook-form";
-import { toast } from "sonner";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -63,13 +64,13 @@ const LoginPage = () => {
                 >
                   <div className="">
                     <div className="py-1">
-                      <RWInput name="email" type="email" label="Email" />
+                      <RWInput label="Email" name="email" type="email" />
                     </div>
                     <div className="py-1">
                       <RWInput
+                        label="Password"
                         name="password"
                         type="password"
-                        label="Password"
                       />
                     </div>
                   </div>

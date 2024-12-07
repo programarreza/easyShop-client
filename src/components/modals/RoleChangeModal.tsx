@@ -1,5 +1,3 @@
-import roleChangeIcon from "@/src/assets/images/change.png";
-import { useRoleChangeMutation } from "@/src/redux/features/user/userApi";
 import { Button } from "@nextui-org/button";
 import {
   Modal,
@@ -11,6 +9,9 @@ import { Select, SelectItem } from "@nextui-org/select";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
+
+import { useRoleChangeMutation } from "@/src/redux/features/user/userApi";
+import roleChangeIcon from "@/src/assets/images/change.png";
 
 const roles = [
   { key: "ADMIN", label: "Admin" },
@@ -37,6 +38,7 @@ const RoleChangeModal = ({ role, userId }: any) => {
     };
 
     const res = await changeRole(args).unwrap();
+
     if (res?.success) {
       toast.success(res?.message, { id: toastId, duration: 1000 });
       onClose();
@@ -46,13 +48,13 @@ const RoleChangeModal = ({ role, userId }: any) => {
   return (
     <>
       <Button className="bg-transparent " size="sm" onPress={onOpen}>
-        <Image src={roleChangeIcon} alt="change icon" height={25} width={25} />
+        <Image alt="change icon" height={25} src={roleChangeIcon} width={25} />
       </Button>
       <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
         className="bg-white"
+        isOpen={isOpen}
         size="md"
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
@@ -64,12 +66,12 @@ const RoleChangeModal = ({ role, userId }: any) => {
                 </div>
                 <div className="pb-4">
                   <Select
+                    className=""
+                    defaultSelectedKeys={[role]}
                     items={roles}
                     label="Select new role"
-                    className=""
-                    variant="bordered"
                     selectedKeys={selectedValue}
-                    defaultSelectedKeys={[role]}
+                    variant="bordered"
                     onSelectionChange={(keys) =>
                       setSelectedValue(Array.from(keys) as string[])
                     }
@@ -80,8 +82,8 @@ const RoleChangeModal = ({ role, userId }: any) => {
                   </Select>
 
                   <button
-                    onClick={() => handleRoleChange()}
                     className="w-full py-3 my-4 px-6 border rounded-lg hover:bg-gray-200"
+                    onClick={() => handleRoleChange()}
                   >
                     Submit Now
                   </button>

@@ -1,6 +1,7 @@
+import { ReactNode } from "react";
+
 import DashboardSidebar from "@/src/components/DashboardSidebar/DashboardSidebar";
 import Container from "@/src/components/ui/Container";
-import { ReactNode } from "react";
 
 const dashboardLayout = ({ children }: { children: ReactNode }) => {
   return (

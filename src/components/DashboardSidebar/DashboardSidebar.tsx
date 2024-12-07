@@ -1,8 +1,9 @@
 "use client";
 
-import useLoggedUser from "@/src/hooks/auth.hook";
 import { Tab, Tabs } from "@nextui-org/tabs";
 import Link from "next/link";
+
+import useLoggedUser from "@/src/hooks/auth.hook";
 
 const DashboardSidebar = () => {
   const loggedUser = useLoggedUser();
@@ -11,17 +12,17 @@ const DashboardSidebar = () => {
     <div>
       <div className="w-full min-h-screen ">
         <Tabs
-          isVertical={true}
           aria-label="Options"
-          color="primary"
-          variant="underlined"
-          fullWidth={true}
           classNames={{
             tabList: "gap-2 w-full relative rounded-none p-0 border-divider ",
             cursor: "w-full bg-[#22d3ee]",
             tab: "w-full px-0 h-10",
             tabContent: "group-data-[selected=true]:text-[#06b6d4]",
           }}
+          color="primary"
+          fullWidth={true}
+          isVertical={true}
+          variant="underlined"
         >
           {/* admin accusable tab */}
           {(loggedUser?.role as unknown as "ADMIN" | "VENDOR" | "CUSTOMER") ===

@@ -38,7 +38,6 @@ export type TCategories = {
   images: string;
 };
 
-
 export type IUser = {
   id: string;
   name: string;
