@@ -18,7 +18,6 @@ const NavbarDropdown = () => {
   const router = useRouter();
   const pathname = usePathname();
   const user = useLoggedUser();
-  console.log(user);
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {

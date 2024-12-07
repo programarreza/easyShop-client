@@ -29,7 +29,7 @@ const RegisterPage = () => {
       };
 
       formData.append("data", JSON.stringify(jsonData));
-      formData.append("profilePhoto", data.image);
+      formData.append("image", data.profilePhoto);
 
       const res = await register(formData).unwrap();
       if (res?.success) {

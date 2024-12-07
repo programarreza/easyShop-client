@@ -39,22 +39,22 @@ const DashboardSidebar = () => {
               />
 
               <Tab
-                key="all categories"
+                key="create category"
                 title={
-                  <Link href="/admin-dashboard/categories">
+                  <Link href="/admin-dashboard/create-category">
                     <div className="flex items-center space-x-2">
-                      <span>Categories</span>
+                      <span>create category</span>
                     </div>
                   </Link>
                 }
               />
 
               <Tab
-                key="create category"
+                key="all categories"
                 title={
-                  <Link href="/admin-dashboard/create-category">
+                  <Link href="/admin-dashboard/categories">
                     <div className="flex items-center space-x-2">
-                      <span>create category</span>
+                      <span>all categories</span>
                     </div>
                   </Link>
                 }
