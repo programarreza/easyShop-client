@@ -665,6 +665,7 @@
     "@react-stately/utils" "3.10.4"
     "@react-types/datepicker" "3.8.3"
 
+<<<<<<< HEAD
 "@nextui-org/tabs@^2.2.2":
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/@nextui-org/tabs/-/tabs-2.2.2.tgz#f4b5f7419800c853a4fd44741370cd09088334e8"
@@ -685,6 +686,8 @@
     "@react-types/tabs" "3.3.10"
     scroll-into-view-if-needed "3.0.10"
 
+=======
+>>>>>>> b11d8f8a8216a25613b4b3f326589a1ac6400293
 "@nextui-org/theme@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@nextui-org/theme/-/theme-2.4.1.tgz#fa8b766f90475e23b1347b79850cff37b231aa41"
@@ -802,11 +805,14 @@
   dependencies:
     "@react-aria/ssr" "3.9.6"
 
+<<<<<<< HEAD
 "@nextui-org/use-is-mounted@2.1.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@nextui-org/use-is-mounted/-/use-is-mounted-2.1.1.tgz#c880a27f7221f7a7d7f3a6b4616f71e23c784cbb"
   integrity sha512-osJB3E/DCu4Le0f+pb21ia9/TaSHwme4r0fHjO5/nUBYk/RCvGlRUUCJClf/wi9WfH8QyjuJ27+zBcUSm6AMMg==
 
+=======
+>>>>>>> b11d8f8a8216a25613b4b3f326589a1ac6400293
 "@nextui-org/use-measure@2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@nextui-org/use-measure/-/use-measure-2.0.2.tgz#94f998c0e59819c0632b43ca8ddc4877e12a47bb"
