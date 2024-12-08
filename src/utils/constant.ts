@@ -3,7 +3,8 @@ export const categoriesRows = [
   { name: "IMAGE", uid: "image" },
   { name: "NAME", uid: "name" },
   { name: "DESCRIPTION", uid: "description" },
-  { name: "ACTION", uid: "action" },
+  { name: "ACTION", uid: "action" }, // edit category
+  { name: "ACTION", uid: "action" }, // delete category
 ];
 
 export const usersRows = [
