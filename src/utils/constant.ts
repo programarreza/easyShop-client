@@ -7,12 +7,10 @@ export const categoriesRows = [
 ];
 
 export const usersRows = [
-  // { name: "SL:", uid: "sl" },
   { name: "IMAGE", uid: "image" },
   { name: "NAME", uid: "name" },
   { name: "EMAIL", uid: "email" },
   { name: "PHONE", uid: "phone" },
-  // { name: "ADDRESS", uid: "address" },
   { name: "STATUS", uid: "status" },
   { name: "ROLE", uid: "role" },
   { name: "ACTION", uid: "action" }, // status change
@@ -21,7 +19,6 @@ export const usersRows = [
 ];
 
 export const myShopProductsRows = [
-  // { name: "SL:", uid: "sl" },
   { name: "IMAGE", uid: "image" },
   { name: "NAME", uid: "name" },
   { name: "DESCRIPTION", uid: "description" },
@@ -29,7 +26,7 @@ export const myShopProductsRows = [
   { name: "DISCOUNT", uid: "discount" },
   { name: "RATING", uid: "rating" },
   { name: "CATEGORY", uid: "category" },
-  { name: "INVENTORY COUNT", uid: "inventoryCount" },
+  { name: "STOCK", uid: "inventoryCount" },
   { name: "ACTION", uid: "action" }, // update product
   { name: "ACTION", uid: "action" }, // delete product
 ];

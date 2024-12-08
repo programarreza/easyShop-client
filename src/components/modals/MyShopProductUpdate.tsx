@@ -1,10 +1,10 @@
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import {
-	Modal,
-	ModalBody,
-	ModalContent,
-	useDisclosure,
+  Modal,
+  ModalBody,
+  ModalContent,
+  useDisclosure,
 } from "@nextui-org/modal";
 import { Select, SelectItem } from "@nextui-org/select";
 import { useRouter } from "next/navigation";
@@ -24,7 +24,7 @@ const MyShopProductUpdate = ({ product }: any) => {
   const categoriesFields = data?.data;
 
   const [selectedValue, setSelectedValue] = useState(
-    product?.categoryId || categoriesFields?.[0]?.id || "",
+    product?.categoryId || categoriesFields?.[0]?.id || ""
   );
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 

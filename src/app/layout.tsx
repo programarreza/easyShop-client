@@ -4,12 +4,12 @@ import { siteConfig } from "@/src/config/site";
 import "@/src/styles/globals.css";
 import clsx from "clsx";
 import { Metadata, Viewport } from "next";
+import { Toaster } from "sonner";
 
-import { Navbar } from "../components/Home/Navbar/Navbar";
 import { Providers } from "../lib/Providers";
+import { Navbar } from "../components/Home/Navbar/Navbar";
 
 import StoreProvider from "./StoreProvider";
-import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: {
