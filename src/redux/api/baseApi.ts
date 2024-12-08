@@ -65,7 +65,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
           setUser({
             user,
             token: data.data.accessToken,
-          }),
+          })
         );
         result = await baseQuery(args, api, extraOptions);
       } else {
@@ -82,6 +82,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["profile", "categories", "users", "shops"],
+  tagTypes: ["profile", "categories", "users", "shops", "myShopProducts"],
   endpoints: () => ({}),
 });

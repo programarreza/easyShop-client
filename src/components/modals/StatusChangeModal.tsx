@@ -37,8 +37,6 @@ const StatusChangeModal = ({ status, userId }: any) => {
       userId: userId,
     };
 
-    console.log({ args });
-
     const res = await changeStatus(args).unwrap();
 
     if (res?.success) {

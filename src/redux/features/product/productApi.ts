@@ -8,8 +8,33 @@ export const shopApi = baseApi.injectEndpoints({
         method: "POST",
         body: productInfo,
       }),
+
+      invalidatesTags: ["myShopProducts"],
+    }),
+
+    getMyShopProducts: builder.query({
+      query: () => ({
+        url: `/products/my-products`,
+        method: "GET",
+      }),
+
+      providesTags: ["myShopProducts"],
+    }),
+
+    updateMyShopProduct: builder.mutation({
+      query: (args) => ({
+        url: `/products/${args.productId}`,
+        method: "PATCH",
+        body: args.productData,
+      }),
+
+      invalidatesTags: ["myShopProducts"],
     }),
   }),
 });
 
-export const { useCreateProductMutation } = shopApi;
+export const {
+  useCreateProductMutation,
+  useGetMyShopProductsQuery,
+  useUpdateMyShopProductMutation,
+} = shopApi;

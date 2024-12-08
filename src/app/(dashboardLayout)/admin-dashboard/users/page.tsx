@@ -17,7 +17,6 @@ import {
   useDeleteUserMutation,
   useGetUsersQuery,
 } from "@/src/redux/features/user/userApi";
-import { IUser } from "@/src/types";
 import { usersRows } from "@/src/utils/constant";
 
 const UsersPage = () => {
@@ -72,7 +71,7 @@ const UsersPage = () => {
         </TableHeader>
 
         <TableBody className="bg-white">
-          {users?.map((user: IUser, index: number) => (
+          {users?.map((user: any, index: number) => (
             <TableRow key={user?.id} className="bg-white">
               {/* <TableCell width={20}>{index + 1}</TableCell> */}
               <TableCell>
