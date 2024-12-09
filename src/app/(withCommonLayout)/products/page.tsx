@@ -1,66 +1,84 @@
-/* eslint-disable prettier/prettier */
 "use client";
 import { useEffect, useState } from "react";
 
 import Container from "@/src/components/ui/Container";
 import ProductCard from "@/src/components/ui/ProductCard";
 import useInfiniteScroll from "@/src/hooks/infinityScroll";
-import { useGetAllProductsQuery } from "@/src/redux/features/product/productApi";
 import { TProduct } from "@/src/types";
 
-const AllProjects = () => {
+const AllProducts = () => {
   const [contents, setContents] = useState<TProduct[]>([]);
   const [page, setPage] = useState(1);
   const [pageSize] = useState(6);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [total, setTotal] = useState(0);
 
-  const { data, isLoading, error } = useGetAllProductsQuery({
-    page,
-    limit: pageSize,
-  });
+  const fetchProjects = async (page: number, pageSize: number) => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/v1/products?page=${page}&limit=${pageSize}`
+      );
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      setTotal(data?.data?.meta?.total);
+
+      return data?.data?.data;
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    if (data?.data?.data) {
-      setTotal(data?.data?.meta?.total);
-      const newProjects = data?.data?.data;
+    const loadProjects = async () => {
+      const newProjects = await fetchProjects(page, pageSize);
 
-      // Add only unique entries
-      setContents((prevData) => {
-        const uniqueProjects = newProjects.filter(
-          (project: TProduct) =>
-            !prevData.some((prevProject) => prevProject.id === project.id)
-        );
+      if (newProjects) {
+        if (page > 1) {
+          setContents((prevData) => [...prevData, ...newProjects]);
+        } else {
+          setContents(newProjects);
+        }
+      }
+    };
 
-        return page > 1 ? [...prevData, ...uniqueProjects] : uniqueProjects;
-      });
-    }
-  }, [data, page]);
+    loadProjects();
+  }, [page, pageSize]);
 
   // Set up infinite scroll
   useInfiniteScroll(page, setPage, total, pageSize);
 
   return (
-    <div className="min-h-screen bg-[#F2F8F8] border ">
+    <div className="min-h-screen m-1">
       <Container>
         {isLoading && page === 1 ? (
           // Full page loader for initial load
           <div className="flex justify-center items-center h-screen">
-            <div className="loader">Loading...</div>
-          </div>
-        ) : error ? (
-          <div className="text-center text-red-500">
-            {/* An error occurred: {error?.message} */}
+            <div className="loader flex justify-center items-center ">
+              Loading...
+            </div>
           </div>
         ) : (
           <>
-            <div className="grid md:grid-cols-4 lg:grid-cols-6 gap-3 py-24 min-h-screen">
-              {contents?.map((product) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-5 py-24 min-h-screen">
+              {contents?.map((product: any) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
+
             {isLoading && page > 1 && (
+              // Loader at the bottom while loading more content
               <div className="flex justify-center mt-5">
-                <div className="loader">Loading more products...</div>
+                <div className="loader">Loading more projects...</div>
               </div>
             )}
           </>
@@ -70,4 +88,4 @@ const AllProjects = () => {
   );
 };
 
-export default AllProjects;
+export default AllProducts;

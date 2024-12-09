@@ -1,5 +1,11 @@
+import AllProducts from "../products/page";
+
 const HomePage = () => {
-  return <div> home page 0000</div>;
+  return (
+    <div>
+      <AllProducts />
+    </div>
+  );
 };
 
 export default HomePage;

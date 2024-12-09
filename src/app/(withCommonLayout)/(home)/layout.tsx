@@ -11,9 +11,9 @@ const CommonLayout = ({
 }) => {
   return (
     <div>
-      {children}
       {banner}
       {categories}
+      {children}
     </div>
   );
 };
