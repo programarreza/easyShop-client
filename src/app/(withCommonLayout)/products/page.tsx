@@ -6,21 +6,33 @@ import ProductCard from "@/src/components/ui/ProductCard";
 import useInfiniteScroll from "@/src/hooks/infinityScroll";
 import { TProduct } from "@/src/types";
 
-const AllProducts = () => {
+type SearchParams = { [key: string]: string | string[] | undefined };
+
+const AllProducts = ({ searchParams }: { searchParams: SearchParams }) => {
   const [contents, setContents] = useState<TProduct[]>([]);
   const [page, setPage] = useState(1);
   const [pageSize] = useState(6);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [total, setTotal] = useState(0);
+  const [noProductsMessage, setNoProductsMessage] = useState<string | null>(
+    null
+  );
 
-  const fetchProjects = async (page: number, pageSize: number) => {
+  const fetchProducts = async (
+    page: number,
+    pageSize: number,
+    category?: string
+  ) => {
     setIsLoading(true);
     setError(null);
+    setNoProductsMessage(null);
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/products?page=${page}&limit=${pageSize}`
+        `http://localhost:5000/api/v1/products?page=${page}&limit=${pageSize}${
+          category ? `&categories=${category}` : ""
+        }`
       );
 
       if (!res.ok) {
@@ -28,7 +40,13 @@ const AllProducts = () => {
       }
 
       const data = await res.json();
+
       setTotal(data?.data?.meta?.total);
+
+      // Check if products are available
+      if (data?.data?.data.length === 0) {
+        setNoProductsMessage("No products available for this category.");
+      }
 
       return data?.data?.data;
     } catch (err: any) {
@@ -39,20 +57,38 @@ const AllProducts = () => {
   };
 
   useEffect(() => {
-    const loadProjects = async () => {
-      const newProjects = await fetchProjects(page, pageSize);
+    const loadProducts = async () => {
+      const category = searchParams?.category
+        ? String(searchParams?.category)
+        : undefined;
 
-      if (newProjects) {
-        if (page > 1) {
-          setContents((prevData) => [...prevData, ...newProjects]);
-        } else {
-          setContents(newProjects);
+      // Check if the category exists and is valid
+      if (category && category !== "undefined") {
+        const newProjects = await fetchProducts(page, pageSize, category);
+
+        if (newProjects) {
+          if (page > 1) {
+            setContents((prevData) => [...prevData, ...newProjects]);
+          } else {
+            setContents(newProjects);
+          }
+        }
+      } else {
+        // If no valid category, you can choose to load all products
+        const newProjects = await fetchProducts(page, pageSize);
+
+        if (newProjects) {
+          if (page > 1) {
+            setContents((prevData) => [...prevData, ...newProjects]);
+          } else {
+            setContents(newProjects);
+          }
         }
       }
     };
 
-    loadProjects();
-  }, [page, pageSize]);
+    loadProducts();
+  }, [page, pageSize, searchParams?.category]);
 
   // Set up infinite scroll
   useInfiniteScroll(page, setPage, total, pageSize);
@@ -69,11 +105,18 @@ const AllProducts = () => {
           </div>
         ) : (
           <>
-            <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-5 py-24 min-h-screen">
-              {contents?.map((product: any) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            {/* Show message if no products available */}
+            {noProductsMessage ? (
+              <div className="flex justify-center items-center min-h-[80vh]">
+                <p className="text-xl text-red-500">{noProductsMessage}</p>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-5 py-24 min-h-screen">
+                {contents?.map((product: any) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            )}
 
             {isLoading && page > 1 && (
               // Loader at the bottom while loading more content
