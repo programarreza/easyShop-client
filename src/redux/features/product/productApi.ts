@@ -12,6 +12,15 @@ export const shopApi = baseApi.injectEndpoints({
       invalidatesTags: ["myShopProducts"],
     }),
 
+    getAllProducts: builder.query({
+      query: ({ page, limit }) => ({
+        url: `/products?page=${page}&limit=${limit}`,
+        method: "GET",
+      }),
+
+      providesTags: ["products"],
+    }),
+
     getMyShopProducts: builder.query({
       query: () => ({
         url: `/products/my-products`,
@@ -46,5 +55,6 @@ export const {
   useCreateProductMutation,
   useGetMyShopProductsQuery,
   useUpdateMyShopProductMutation,
-  useDeleteMyShopProductMutation
+  useDeleteMyShopProductMutation,
+  useGetAllProductsQuery,
 } = shopApi;

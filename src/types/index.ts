@@ -47,3 +47,24 @@ export type IUser = {
   status: TUserStatus;
   role: TUserRole;
 };
+
+export type TShop = {
+  id: string;
+  name: string;
+  description: string;
+  logo: string;
+};
+
+export type TProduct = {
+  categoryId: TCategories;
+  createdAt: string;
+  description: string;
+  discount: number;
+  id: string;
+  images: string;
+  inventoryCount: number;
+  name: string;
+  price: number;
+  rating: number;
+  shopId: TShop;
+};
