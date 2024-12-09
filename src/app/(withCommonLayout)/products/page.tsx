@@ -4,11 +4,9 @@ import { useEffect, useState } from "react";
 import Container from "@/src/components/ui/Container";
 import ProductCard from "@/src/components/ui/ProductCard";
 import useInfiniteScroll from "@/src/hooks/infinityScroll";
-import { TProduct } from "@/src/types";
+import { TProduct, TSearchParams } from "@/src/types";
 
-type SearchParams = { [key: string]: string | string[] | undefined };
-
-const AllProducts = ({ searchParams }: { searchParams: SearchParams }) => {
+const AllProducts = ({ searchParams }: { searchParams: TSearchParams }) => {
   const [contents, setContents] = useState<TProduct[]>([]);
   const [page, setPage] = useState(1);
   const [pageSize] = useState(6);

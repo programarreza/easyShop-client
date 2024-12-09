@@ -68,3 +68,5 @@ export type TProduct = {
   rating: number;
   shopId: TShop;
 };
+
+export type TSearchParams = { [key: string]: string | string[] | undefined };
