@@ -1,23 +1,22 @@
-"use client";
-
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "sonner";
 
 const initialState = {
-  products: [] as any,
+  products: [] as any[],
   selectedItems: 0,
   totalPrice: 0,
-  tax: 0,
-  taxRate: 0.15,
   grandTotal: 0,
+  couponCode: "",
+  discount: 0, // Field to store the total discount amount
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state: any, action: any) => {
+    addToCart: (state, action) => {
       const isExist = state.products.find(
-        (product: any) => product.id === action.payload.id
+        (product) => product.id === action.payload.id
       );
 
       if (!isExist) {
@@ -26,12 +25,12 @@ const cartSlice = createSlice({
 
       state.selectedItems = selectSelectedItems(state);
       state.totalPrice = selectTotalPrice(state);
-      state.tax = selectTax(state);
       state.grandTotal = selectGrandTotal(state);
+      state.discount = calculateDiscount(state);
     },
 
-    updateQuantity: (state: any, action) => {
-      const products = state.products.map((product: any) => {
+    updateQuantity: (state, action) => {
+      const products = state.products.map((product) => {
         if (product.id === action.payload.id) {
           if (action.payload.type === "increment") {
             product.quantity += 1;
@@ -43,49 +42,133 @@ const cartSlice = createSlice({
         return product;
       });
 
-      state.products = products.filter((product: any) => product.quantity > 0);
+      state.products = products.filter((product) => product.quantity > 0);
+
+      if (state.products.length === 0) {
+        // Reset discount system if cart is empty
+        state.couponCode = "";
+        state.discount = 0;
+      }
 
       state.selectedItems = selectSelectedItems(state);
       state.totalPrice = selectTotalPrice(state);
-      state.tax = selectTax(state);
+      state.discount = calculateDiscount(state);
       state.grandTotal = selectGrandTotal(state);
     },
+
     removeFromCart: (state, action) => {
       state.products = state.products.filter(
-        (product: any) => product.id !== action.payload.id
+        (product) => product.id !== action.payload.id
       );
+
+      if (state.products.length === 0) {
+        // Reset discount system if cart is empty
+        state.couponCode = "";
+        state.discount = 0;
+      }
+
       state.selectedItems = selectSelectedItems(state);
       state.totalPrice = selectTotalPrice(state);
-      state.tax = selectTax(state);
+      state.discount = calculateDiscount(state);
       state.grandTotal = selectGrandTotal(state);
     },
+
     clearCart: (state) => {
       state.products = [];
       state.selectedItems = 0;
       state.totalPrice = 0;
-      state.tax = 0;
       state.grandTotal = 0;
+      state.couponCode = "";
+      state.discount = 0; // Reset discount system on cart clear
+    },
+
+    applyCoupon: (state, action) => {
+      const { couponCode } = action.payload;
+
+      if (state.products.length === 0) {
+        // Reset discount system if cart is empty
+        state.couponCode = "";
+        state.discount = 0;
+        state.grandTotal = state.totalPrice;
+
+        return;
+      }
+
+      let totalDiscount = 0;
+
+      state.products.forEach((product) => {
+        const { shop, quantity } = product;
+        const coupon = shop?.coupon;
+
+        if (
+          coupon &&
+          coupon.code === couponCode &&
+          new Date(coupon.validFrom) <= new Date() &&
+          new Date(coupon.validTo) >= new Date()
+        ) {
+          totalDiscount += (product.price * quantity * coupon.discount) / 100;
+        }
+      });
+
+      if (totalDiscount > 0) {
+        state.couponCode = couponCode;
+        state.discount = totalDiscount;
+        state.grandTotal = state.totalPrice - totalDiscount;
+
+        toast.success("Coupon applied successfully!");
+      } else {
+        state.couponCode = "";
+        state.discount = 0;
+        state.grandTotal = state.totalPrice;
+
+        toast.error("Invalid or expired coupon code.");
+      }
     },
   },
 });
 
-export const selectSelectedItems = (state: any) =>
-  state.products.reduce((total: number, product: any) => {
-    return Number(total + product.quantity);
-  }, 0);
+const calculateDiscount = (state: any) => {
+  if (!state.couponCode) return 0;
 
-export const selectTotalPrice = (state: any) =>
-  state.products.reduce((total: number, product: any) => {
-    return Number(total + product.quantity * product.price);
-  }, 0);
+  let totalDiscount = 0;
 
-export const selectTax = (state: any) =>
-  selectTotalPrice(state) * state.taxRate;
+  state.products.forEach((product: any) => {
+    const { shop, quantity } = product;
+    const coupon = shop?.coupon;
 
-export const selectGrandTotal = (state: any) => {
-  return selectTotalPrice(state) + selectTotalPrice(state) * state.taxRate;
+    if (
+      coupon &&
+      coupon.code === state.couponCode &&
+      new Date(coupon.validFrom) <= new Date() &&
+      new Date(coupon.validTo) >= new Date()
+    ) {
+      totalDiscount += (product.price * quantity * coupon.discount) / 100;
+    }
+  });
+
+  return totalDiscount;
 };
 
-export const { addToCart, updateQuantity, removeFromCart, clearCart } =
-  cartSlice.actions;
+export const selectSelectedItems = (state: any) =>
+  state.products.reduce(
+    (total: any, product: any) => total + product.quantity,
+    0
+  );
+
+export const selectTotalPrice = (state: any) =>
+  state.products.reduce(
+    (total: any, product: any) => total + product.quantity * product.price,
+    0
+  );
+
+export const selectGrandTotal = (state: any) =>
+  state.totalPrice - state.discount;
+
+export const {
+  addToCart,
+  updateQuantity,
+  removeFromCart,
+  clearCart,
+  applyCoupon,
+} = cartSlice.actions;
 export default cartSlice.reducer;

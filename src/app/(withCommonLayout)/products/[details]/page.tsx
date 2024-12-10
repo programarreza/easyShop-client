@@ -63,6 +63,10 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
                 <span className="text-gray-600">Category:</span>{" "}
                 {product?.categories?.name}
               </p>
+              <p>
+                <span className="text-gray-600">Shop name:</span>{" "}
+                {product?.shop?.name}
+              </p>
 
               {/* price */}
               <div className="flex gap-6">

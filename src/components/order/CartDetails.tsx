@@ -32,7 +32,7 @@ const CartDetails = ({ product }: { product: any }) => {
   return (
     <div className="">
       {/* product info */}
-      <div className="flex flex-col md:flex-row lg:gap-6 xl:gap-32 items-center border mb-4 justify-between p-2 shadow-md rounded-md">
+      <div className="flex flex-col md:flex-row lg:gap-6 xl:gap-32 items-center border mb-4 justify-between p-2 shadow-md rounded-md bg-white">
         <div className="flex flex-col md:flex-row gap-4 w-full">
           <Image
             alt="product image"
@@ -50,6 +50,10 @@ const CartDetails = ({ product }: { product: any }) => {
             <p>
               <span className="text-gray-600">Category:</span>{" "}
               {product?.categories?.name}
+            </p>
+            <p>
+              <span className="text-gray-600">Shop name:</span>{" "}
+              {product?.shop?.name}
             </p>
             <div>
               <Rating
