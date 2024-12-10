@@ -3,6 +3,7 @@
 
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
+import Link from "next/link";
 import { FaRegStar, FaStar } from "react-icons/fa6";
 import Rating from "react-rating";
 import { toast } from "sonner";
@@ -112,10 +113,10 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
             </div>
 
             {/* Button container pinned to the bottom */}
-            <div className="px-2 py-4 mt-auto ">
+            <div className="px-2 py-4 mt-auto flex justify-between items-center">
               {product?.inventoryCount > 0 ? (
                 <Button
-                  className="bg-[#b33000]  font-semibold py-2 px-4 rounded-lg hover:bg-[#ff4500] transition duration-300 shadow-md hover:shadow-lg hover:text-white cursor-pointer"
+                  className=" py-3 my-4 px-6 border rounded-lg hover:bg-gray-200"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleAddToCart(product);
@@ -131,6 +132,13 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
                   Add to Cart
                 </Button>
               )}
+
+              <Link
+                className=" p-2 py-2 my-4 px-2 border rounded-lg hover:bg-gray-200"
+                href={`/shop/details?id=${product?.shop?.id}`}
+              >
+                go to store
+              </Link>
             </div>
           </div>
         </div>

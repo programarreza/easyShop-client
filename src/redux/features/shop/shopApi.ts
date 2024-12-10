@@ -21,6 +21,15 @@ export const shopApi = baseApi.injectEndpoints({
       providesTags: ["shops"],
     }),
 
+    getSingleShop: builder.query({
+      query: (shopId) => ({
+        url: `/shops/${shopId}`,
+        method: "GET",
+      }),
+
+      providesTags: ["shop"],
+    }),
+
     updateMyShop: builder.mutation({
       query: (shopData) => ({
         url: `/shops/my-shop`,
@@ -37,4 +46,5 @@ export const {
   useCreateShopMutation,
   useGetMyShopQuery,
   useUpdateMyShopMutation,
+  useGetSingleShopQuery,
 } = shopApi;
