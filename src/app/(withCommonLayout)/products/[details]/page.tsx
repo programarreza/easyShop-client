@@ -60,7 +60,7 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
               />
 
               <p>
-                <span className="text-gray-600">Brand:</span>{" "}
+                <span className="text-gray-600">Category:</span>{" "}
                 {product?.categories?.name}
               </p>
 
@@ -109,7 +109,7 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
 
             {/* Button container pinned to the bottom */}
             <div className="px-2 py-4 mt-auto ">
-              {product?.stockQuantity > 0 ? (
+              {product?.inventoryCount > 0 ? (
                 <Button
                   className="bg-[#b33000]  font-semibold py-2 px-4 rounded-lg hover:bg-[#ff4500] transition duration-300 shadow-md hover:shadow-lg hover:text-white cursor-pointer"
                   onClick={(e) => {
@@ -122,7 +122,7 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
               ) : (
                 <Button
                   disabled
-                  className="bg-white text-black font-semibold py-2 px-4 rounded-lg hover:bg-gray-800 hover: transition duration-300 shadow-md hover:shadow-lg hover:text-white cursor-pointer"
+                  className="bg-white text-black font-semibold py-2 px-4 rounded-lg hover:bg-gray-800 hover: transition duration-300 shadow-md hover:shadow-lg hover:text-white"
                 >
                   Add to Cart
                 </Button>

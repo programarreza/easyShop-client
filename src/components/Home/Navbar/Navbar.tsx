@@ -10,14 +10,19 @@ import { link as linkStyles } from "@nextui-org/theme";
 import clsx from "clsx";
 import Link, { default as NextLink } from "next/link";
 import { useEffect, useState } from "react";
+import { IoCartOutline } from "react-icons/io5";
 
 import NavbarDropdown from "./NavbarDropdown";
 
 import { Logo } from "@/src/components/icons";
 import { siteConfig } from "@/src/config/site";
 import useLoggedUser from "@/src/hooks/auth.hook";
+import { useAppSelector } from "@/src/redux/hooks";
 
 export const Navbar = () => {
+  // const { selectedItems } = useAppSelector((store) => store?.cart);
+  const { selectedItems } = useAppSelector((store) => store?.cart);
+
   const loggedUser = useLoggedUser();
   const [isOpen, setIsOpen] = useState(false);
   const [scrollDirection, setScrollDirection] = useState("up");
@@ -87,7 +92,7 @@ export const Navbar = () => {
                     className={clsx(
                       " mt-2", // Default text color set to white
                       linkStyles({ color: "foreground" }),
-                      "data-[active=true]:text-primary data-[active=true]:font-medium",
+                      "data-[active=true]:text-primary data-[active=true]:font-medium"
                     )}
                     color="foreground"
                     href={item.href}
@@ -96,10 +101,20 @@ export const Navbar = () => {
                   </NextLink>
                 </NavbarItem>
               ))}
+
+              <Link href={"/cart"}>
+                <div className="relative mt-2">
+                  <IoCartOutline size={30} />
+                  <span className="rounded-full absolute top-[-8px] left-[20px] bg-transparent border-2 border-green-700 text-black text-center size-2 font-bold flex items-center justify-center p-2">
+                    {selectedItems}
+                  </span>
+                </div>
+              </Link>
+
               <Link href={getDashboardLink()}>
                 {loggedUser ? (
                   <div className="flex justify-center items-center gap-2">
-                    <p>My dashboard</p> <NavbarDropdown />{" "}
+                    <NavbarDropdown />
                   </div>
                 ) : (
                   <Link href={"/login"}>

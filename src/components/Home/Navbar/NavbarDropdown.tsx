@@ -47,7 +47,7 @@ const NavbarDropdown = () => {
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
-          <DropdownItem onClick={() => handleNavigation(`${userPath}`)}>
+          <DropdownItem >
             <div className="flex gap-2">
               {/* <Avatar src={user?.profilePhoto} /> */}
               <div>
@@ -57,6 +57,9 @@ const NavbarDropdown = () => {
             </div>
           </DropdownItem>
 
+          <DropdownItem onClick={() => handleNavigation(`${userPath}`)}>
+            My Dashboard
+          </DropdownItem>
           <DropdownItem
             className="text-danger"
             color="danger"
