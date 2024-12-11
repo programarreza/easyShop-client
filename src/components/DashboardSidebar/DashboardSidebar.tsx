@@ -129,6 +129,16 @@ const DashboardSidebar = () => {
                 }
               />
               <Tab
+                key="my coupon"
+                title={
+                  <Link href="/vendor-dashboard/my-coupon">
+                    <div className="flex items-center space-x-2">
+                      <span>my coupon</span>
+                    </div>
+                  </Link>
+                }
+              />
+              <Tab
                 key="order-history"
                 title={
                   <Link href="/vendor-dashboard/order-history">

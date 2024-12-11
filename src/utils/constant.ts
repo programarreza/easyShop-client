@@ -31,3 +31,12 @@ export const myShopProductsRows = [
   { name: "ACTION", uid: "action" }, // update product
   { name: "ACTION", uid: "action" }, // delete product
 ];
+
+export const couponRows = [
+  { name: "SHOP NAME", uid: "shop name" },
+  { name: "COUPON CODE", uid: "coupon code" },
+  { name: "DISCOUNT (%)", uid: "discount" },
+  { name: "START DATE ", uid: "start date" },
+  { name: "END DATE", uid: "end date" },
+  { name: "ACTION", uid: "action" }, // delete coupon
+];
