@@ -50,9 +50,17 @@ const ProductCard = ({ product }: any) => {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <p className="text-xl">{discountedPrice.toFixed(0)}</p>
+                {product?.discount > 0 ? (
+                  <p className="text-xl">{discountedPrice.toFixed(0)}</p>
+                ) : (
+                  <p className="text-xl">{product?.price}</p>
+                )}
               </div>
-              <p className="text-sm text-gray-700">-{product.discount}%</p>
+              {product?.discount ? (
+                <p className="text-sm text-gray-700">-{product.discount}%</p>
+              ) : (
+                ""
+              )}
             </div>
 
             {/* rating */}

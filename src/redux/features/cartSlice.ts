@@ -16,7 +16,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const isExist = state.products.find(
-        (product) => product.id === action.payload.id,
+        (product) => product.id === action.payload.id
       );
 
       if (!isExist) {
@@ -58,7 +58,7 @@ const cartSlice = createSlice({
 
     removeFromCart: (state, action) => {
       state.products = state.products.filter(
-        (product) => product.id !== action.payload.id,
+        (product) => product.id !== action.payload.id
       );
 
       if (state.products.length === 0) {
@@ -152,14 +152,18 @@ const calculateDiscount = (state: any) => {
 export const selectSelectedItems = (state: any) =>
   state.products.reduce(
     (total: any, product: any) => total + product.quantity,
-    0,
+    0
   );
 
 export const selectTotalPrice = (state: any) =>
-  state.products.reduce(
-    (total: any, product: any) => total + product.quantity * product.price,
-    0,
-  );
+  state.products.reduce((total: any, product: any) => {
+    const discountedPrice =
+      product?.price && product?.discount
+        ? product.price * (1 - product.discount / 100)
+        : product.price || 0;
+
+    return total + product.quantity * discountedPrice;
+  }, 0);
 
 export const selectGrandTotal = (state: any) =>
   state.totalPrice - state.discount;

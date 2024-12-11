@@ -45,10 +45,14 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
 
           <div className="flex flex-col flex-1 shadow-large p-3 rounded-md">
             <div className="w-full space-y-4 flex-grow">
-              <p className="text-xl mb-2 mt-1">{product?.name}</p>
+              <p className="text-xl mb-2 mt-1">
+                {product.name.length > 150
+                  ? `${product.name.substring(0, 150)}...`
+                  : product.name}
+              </p>
               <p>
-                {product?.description?.length > 430
-                  ? `${product.description.substring(0, 430)}.`
+                {product?.description?.length > 330
+                  ? `${product.description.substring(0, 330)}.`
                   : product?.description}
               </p>
 
@@ -86,30 +90,38 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <p className="text-xl">{discountedPrice?.toFixed(0)}</p>
+                  {product?.discount > 0 ? (
+                    <p className="text-xl">{discountedPrice.toFixed(0)}</p>
+                  ) : (
+                    <p className="text-xl">{product?.price}</p>
+                  )}
                 </div>
               </div>
 
-              <div className="flex gap-6">
-                <div className="flex justify-center items-center line-through">
-                  <svg
-                    className="size-4"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="m8.25 7.5.415-.207a.75.75 0 0 1 1.085.67V10.5m0 0h6m-6 0h-1.5m1.5 0v5.438c0 .354.161.697.473.865a3.751 3.751 0 0 0 5.452-2.553c.083-.409-.263-.75-.68-.75h-.745M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <p className="text-sm text-gray-700 ">{product?.price}</p>
+              {product?.discount ? (
+                <div className="flex gap-6">
+                  <div className="flex justify-center items-center line-through">
+                    <svg
+                      className="size-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m8.25 7.5.415-.207a.75.75 0 0 1 1.085.67V10.5m0 0h6m-6 0h-1.5m1.5 0v5.438c0 .354.161.697.473.865a3.751 3.751 0 0 0 5.452-2.553c.083-.409-.263-.75-.68-.75h-.745M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <p className="text-sm text-gray-700 ">{product?.price}</p>
+                  </div>
+                  <p className="text-sm text-gray-700">-{product?.discount}%</p>
                 </div>
-                <p className="text-sm text-gray-700">-{product?.discount}%</p>
-              </div>
+              ) : (
+                ""
+              )}
             </div>
 
             {/* Button container pinned to the bottom */}

@@ -29,6 +29,11 @@ const CartDetails = ({ product }: { product: any }) => {
     dispatch(removeFromCart({ id }));
   };
 
+  const discountedPrice =
+    product?.price && product?.discount
+      ? product?.price * (1 - product?.discount / 100)
+      : 0;
+
   return (
     <div className="">
       {/* product info */}
@@ -70,7 +75,11 @@ const CartDetails = ({ product }: { product: any }) => {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <FaBangladeshiTakaSign />
-              {product?.price}
+              {product?.discount > 0 ? (
+                <p className="text-xl">{discountedPrice.toFixed(0)}</p>
+              ) : (
+                <p className="text-xl">{product?.price}</p>
+              )}
             </div>
             <button
               className="bg-red-600  p-1 rounded-full hover:bg-red-700"
