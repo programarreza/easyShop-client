@@ -28,7 +28,7 @@ const ProductCard = ({ product }: any) => {
             <div className="flex justify-between text-sm pb-2 mb-1 border-gray-700 font-semibold">
               <span>
                 {product?.name?.length > 45
-                  ? `${product.name.substring(0, 45)}`
+                  ? `${product?.name.substring(0, 45)}`
                   : product?.name}
               </span>
             </div>
@@ -51,13 +51,13 @@ const ProductCard = ({ product }: any) => {
                   />
                 </svg>
                 {product?.discount > 0 ? (
-                  <p className="text-xl">{discountedPrice.toFixed(0)}</p>
+                  <p className="text-xl">{discountedPrice?.toFixed(0)}</p>
                 ) : (
                   <p className="text-xl">{product?.price}</p>
                 )}
               </div>
               {product?.discount ? (
-                <p className="text-sm text-gray-700">-{product.discount}%</p>
+                <p className="text-sm text-gray-700">-{product?.discount}%</p>
               ) : (
                 ""
               )}

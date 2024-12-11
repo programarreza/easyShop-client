@@ -19,11 +19,12 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
   // get shop data
   const { data } = useGetSingleShopQuery(searchParams?.id);
   const shopData = data?.data;
+  const couponData = shopData?.coupon;
 
   const fetchProducts = async (
     page: number,
     pageSize: number,
-    category?: string
+    category?: string,
   ) => {
     setIsLoading(true);
     setError(null);
@@ -32,7 +33,7 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
       const res = await fetch(
         `http://localhost:5000/api/v1/products/${searchParams?.id}/shop-product?page=${page}&limit=${pageSize}${
           category ? `&categories=${category}` : ""
-        }`
+        }`,
       );
 
       if (!res.ok) {
@@ -90,12 +91,24 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
   // Set up infinite scroll
   useInfiniteScroll(page, setPage, total, pageSize);
 
+  // Format the validFrom and validTo dates
+  const formatDate = (date: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+
+    return new Date(date).toLocaleDateString("en-US", options);
+  };
+
   return (
     <div className=" m-2 bg-[#F2F4F8]">
       <Container>
         <div className=" pt-24">
           <div className="flex items-center justify-between gap-3 bg-white py-2">
-            <div className="flex items-center gap-3">
+            {/* shop info */}
+            <div className="flex items-center gap-3 p-1">
               <Image
                 alt={shopData?.name}
                 height={60}
@@ -113,11 +126,46 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
                 </p>
                 <p className="text-sm">Followers: {shopData?.followerCount}</p>
               </div>
+              <div className="border p-2">Follow/unFollow</div>
             </div>
 
-            <div className="border p-2">Follow/unFollow</div>
+            {/* coupon info */}
+            {shopData?.coupon && (
+              <div className=" bg-white rounded-lg  p-1">
+                <div className="space-y-2 flex gap-5">
+                  <div>
+                    <p className="text-lg text-gray-700">
+                      <strong>Coupon Code:</strong> {couponData?.code}
+                    </p>
+                    <p className="text-lg text-gray-700">
+                      <strong>Discount:</strong> {couponData?.discount}%
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-lg text-gray-700">
+                      <strong>Valid From:</strong>{" "}
+                      {formatDate(couponData?.validFrom)}
+                    </p>
+                    <p className="text-lg text-gray-700">
+                      <strong>Valid To:</strong>{" "}
+                      {formatDate(couponData?.validTo)}
+                    </p>
+                    <p className="text-lg text-gray-700">
+                      <strong>Coupon Status:</strong>
+                      <span
+                        className={`font-semibold ${couponData?.isDeleted ? "text-red-500" : "text-green-500"}`}
+                      >
+                        {couponData?.isDeleted ? "Inactive" : "Active"}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
+
         <div>
           {isLoading && page === 1 ? (
             // Full page loader for initial load

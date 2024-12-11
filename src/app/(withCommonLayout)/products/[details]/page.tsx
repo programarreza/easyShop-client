@@ -46,9 +46,9 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
           <div className="flex flex-col flex-1 shadow-large p-3 rounded-md">
             <div className="w-full space-y-4 flex-grow">
               <p className="text-xl mb-2 mt-1">
-                {product.name.length > 150
-                  ? `${product.name.substring(0, 150)}...`
-                  : product.name}
+                {product?.name?.length > 150
+                  ? `${product?.name.substring(0, 150)}...`
+                  : product?.name}
               </p>
               <p>
                 {product?.description?.length > 330
