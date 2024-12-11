@@ -11,10 +11,11 @@ export const couponApi = baseApi.injectEndpoints({
     }),
 
     deleteCoupon: builder.mutation({
-      query: () => ({
+      query: (id) => ({
         url: "/coupons",
         method: "DELETE",
       }),
+      invalidatesTags: ["shop", "profile"]
     }),
   }),
 });
