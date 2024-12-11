@@ -9,46 +9,47 @@ import {
   TableRow,
 } from "@nextui-org/table";
 import { Tooltip } from "@nextui-org/tooltip";
+import Swal from "sweetalert2";
 
 import useLoggedUser from "@/src/hooks/auth.hook";
-import { useDeleteUserMutation } from "@/src/redux/features/user/userApi";
+import { useDeleteCouponMutation } from "@/src/redux/features/coupon/couponApi";
 import { couponRows } from "@/src/utils/constant";
 
 const MyCouponPage = () => {
-  const [deleteUser] = useDeleteUserMutation();
+  const [deleteCoupon] = useDeleteCouponMutation();
   const user = useLoggedUser();
   const couponData = user?.shop?.coupon;
 
-  //   const handleDelete = (id: string) => {
-  //     Swal.fire({
-  //       title: "Are you sure?",
-  //       text: "You won't be able to revert this!",
-  //       icon: "warning",
-  //       showCancelButton: true,
-  //       confirmButtonColor: "#ff7527",
-  //       cancelButtonColor: "#d33",
-  //       confirmButtonText: "Yes, delete it!",
-  //       width: "350px",
-  //       customClass: {
-  //         popup: "",
-  //         title: "",
-  //       },
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //         deleteUser(id);
-  //         Swal.fire({
-  //           title: "Deleted!",
-  //           text: "Your product has been deleted.",
-  //           icon: "success",
-  //           width: "350px",
-  //           customClass: {
-  //             popup: "",
-  //             title: "",
-  //           },
-  //         });
-  //       }
-  //     });
-  //   };
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ff7527",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      width: "350px",
+      customClass: {
+        popup: "",
+        title: "",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteCoupon;
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your product has been deleted.",
+          icon: "success",
+          width: "350px",
+          customClass: {
+            popup: "",
+            title: "",
+          },
+        });
+      }
+    });
+  };
 
   // Format the validFrom and validTo dates
   const formatDate = (date: string) => {
@@ -88,7 +89,7 @@ const MyCouponPage = () => {
               <Tooltip color="danger" content="Delete coupon">
                 <button
                   className="text-lg text-danger cursor-pointer active:opacity-50"
-                  // onClick={() => handleDelete(user?.id)}
+                  onClick={() => handleDelete()}
                 >
                   <svg
                     className="size-7"

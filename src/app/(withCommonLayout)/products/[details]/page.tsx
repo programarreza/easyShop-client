@@ -91,7 +91,7 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
                     />
                   </svg>
                   {product?.discount > 0 ? (
-                    <p className="text-xl">{discountedPrice.toFixed(0)}</p>
+                    <p className="text-xl">{discountedPrice?.toFixed(0)}</p>
                   ) : (
                     <p className="text-xl">{product?.price}</p>
                   )}

@@ -76,7 +76,7 @@ const CartDetails = ({ product }: { product: any }) => {
             <div className="flex items-center gap-2 mb-2">
               <FaBangladeshiTakaSign />
               {product?.discount > 0 ? (
-                <p className="text-xl">{discountedPrice.toFixed(0)}</p>
+                <p className="text-xl">{discountedPrice?.toFixed(0)}</p>
               ) : (
                 <p className="text-xl">{product?.price}</p>
               )}

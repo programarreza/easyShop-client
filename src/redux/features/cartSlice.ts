@@ -7,7 +7,7 @@ const initialState = {
   totalPrice: 0,
   grandTotal: 0,
   couponCode: "",
-  discount: 0, // Field to store the total discount amount
+  discount: 0, // Total discount amount
 };
 
 const cartSlice = createSlice({
@@ -15,12 +15,40 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const isExist = state.products.find(
-        (product) => product.id === action.payload.id
-      );
+      const incomingProduct = action.payload;
 
-      if (!isExist) {
-        state.products.push({ ...action.payload, quantity: 1 });
+      // Check if cart is empty
+      if (state.products.length === 0) {
+        state.products.push({ ...incomingProduct, quantity: 1 });
+      } else {
+        const existingShop = state.products[0]?.shop.id;
+        const incomingShop = incomingProduct.shop.id;
+
+        if (existingShop === incomingShop) {
+          // Same shop, add product
+          const isExist = state.products.find(
+            (product) => product.id === incomingProduct.id
+          );
+
+          if (!isExist) {
+            state.products.push({ ...incomingProduct, quantity: 1 });
+          } else {
+            toast.error("Product already exists in the cart.");
+          }
+        } else {
+          // Different shop, prompt user
+          const confirmClear = window.confirm(
+            "Your cart contains items from another shop. Do you want to clear the cart and add this product?"
+          );
+
+          if (confirmClear) {
+            state.products = [{ ...incomingProduct, quantity: 1 }];
+          } else {
+            toast.error(
+              "Action canceled. Cannot add product from a different shop."
+            );
+          }
+        }
       }
 
       state.selectedItems = selectSelectedItems(state);
@@ -45,7 +73,6 @@ const cartSlice = createSlice({
       state.products = products.filter((product) => product.quantity > 0);
 
       if (state.products.length === 0) {
-        // Reset discount system if cart is empty
         state.couponCode = "";
         state.discount = 0;
       }
@@ -62,7 +89,6 @@ const cartSlice = createSlice({
       );
 
       if (state.products.length === 0) {
-        // Reset discount system if cart is empty
         state.couponCode = "";
         state.discount = 0;
       }
@@ -79,7 +105,7 @@ const cartSlice = createSlice({
       state.totalPrice = 0;
       state.grandTotal = 0;
       state.couponCode = "";
-      state.discount = 0; // Reset discount system on cart clear
+      state.discount = 0;
     },
 
     applyCoupon: (state, action) => {
@@ -127,6 +153,7 @@ const cartSlice = createSlice({
   },
 });
 
+// Utility functions
 const calculateDiscount = (state: any) => {
   if (!state.couponCode) return 0;
 
@@ -175,4 +202,5 @@ export const {
   clearCart,
   applyCoupon,
 } = cartSlice.actions;
+
 export default cartSlice.reducer;

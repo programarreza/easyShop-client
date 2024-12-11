@@ -9,7 +9,14 @@ export const couponApi = baseApi.injectEndpoints({
         body: couponInfo,
       }),
     }),
+
+    deleteCoupon: builder.mutation({
+      query: () => ({
+        url: "/coupons",
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useCreateCouponMutation } = couponApi;
+export const { useCreateCouponMutation, useDeleteCouponMutation } = couponApi;

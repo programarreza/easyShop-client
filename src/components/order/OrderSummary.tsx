@@ -21,17 +21,17 @@ const OrderSummary = () => {
       <div className="space-y-2">
         <p>Selected Items: {selectedItems}</p>
         <div className="flex items-center">
-          <p>Total Price: {totalPrice.toFixed(2)}</p>{" "}
+          <p>Total Price: {totalPrice?.toFixed(2)}</p>{" "}
           <FaBangladeshiTakaSign size={15} />
         </div>
         {discount > 0 && (
           <p className="flex items-center">
-            Discount: {discount.toFixed(2)} <FaBangladeshiTakaSign size={15} />
+            Discount: {discount?.toFixed(2)} <FaBangladeshiTakaSign size={15} />
           </p>
         )}
 
         <div className="flex items-center">
-          <p>Grand Total: {grandTotal.toFixed(2)}</p>{" "}
+          <p>Grand Total: {grandTotal?.toFixed(2)}</p>{" "}
           <FaBangladeshiTakaSign size={15} />
         </div>
       </div>
