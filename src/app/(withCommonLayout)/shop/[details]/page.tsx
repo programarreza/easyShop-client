@@ -1,42 +1,5 @@
-// "use client";
-
-// import Container from "@/src/components/ui/Container";
-// import ProductCard from "@/src/components/ui/ProductCard";
-// import { useGetShopProductsQuery } from "@/src/redux/features/product/productApi";
-// import { useGetSingleShopQuery } from "@/src/redux/features/shop/shopApi";
-// import { TSearchParams } from "@/src/types";
-
-// const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
-//   //   get shop data
-//   const { data: shopData } = useGetSingleShopQuery(searchParams?.id);
-
-//   //   get shop product
-//   const { data } = useGetShopProductsQuery(searchParams?.id);
-
-//   const shopProducts = data?.data;
-
-//   console.log(9, data?.data);
-
-//   return (
-//     <Container>
-//       <div className="mt-24">
-//         {/* header */}
-//         <div className="border">sgfgfdsg</div>
-
-//         {/* product  */}
-//         <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-5 py-24 min-h-screen">
-//           {shopProducts?.map((product: any) => (
-//             <ProductCard key={product.id} product={product} />
-//           ))}
-//         </div>
-//       </div>
-//     </Container>
-//   );
-// };
-
-// export default ShopDetailsPage;
-
 "use client";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import Container from "@/src/components/ui/Container";
@@ -54,7 +17,8 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
   const [total, setTotal] = useState(0);
 
   // get shop data
-  const { data: shopData } = useGetSingleShopQuery(searchParams?.id);
+  const { data } = useGetSingleShopQuery(searchParams?.id);
+  const shopData = data?.data;
 
   const fetchProducts = async (
     page: number,
@@ -127,9 +91,33 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
   useInfiniteScroll(page, setPage, total, pageSize);
 
   return (
-    <div className="min-h-screen m-2">
+    <div className=" m-2 bg-[#F2F4F8]">
       <Container>
-        <h2 className="mt-24">heading area </h2>
+        <div className=" pt-24">
+          <div className="flex items-center justify-between gap-3 bg-white py-2">
+            <div className="flex items-center gap-3">
+              <Image
+                alt={shopData?.name}
+                height={60}
+                src={shopData?.logo}
+                width={60}
+              />
+
+              <div>
+                <p className="font-bold text-xl">{shopData?.name}</p>
+                <p className="text-sm">
+                  {" "}
+                  {shopData?.description?.length > 30
+                    ? `${shopData?.description.substring(0, 30)}`
+                    : shopData?.description}
+                </p>
+                <p className="text-sm">Followers: {shopData?.followerCount}</p>
+              </div>
+            </div>
+
+            <div className="border p-2">Follow/unFollow</div>
+          </div>
+        </div>
         <div>
           {isLoading && page === 1 ? (
             // Full page loader for initial load

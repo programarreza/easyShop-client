@@ -92,7 +92,7 @@ export const Navbar = () => {
                     className={clsx(
                       " mt-2", // Default text color set to white
                       linkStyles({ color: "foreground" }),
-                      "data-[active=true]:text-primary data-[active=true]:font-medium"
+                      "data-[active=true]:text-primary data-[active=true]:font-medium",
                     )}
                     color="foreground"
                     href={item.href}

@@ -4,7 +4,7 @@ const useInfiniteScroll = (
   page: number,
   setPage: Dispatch<SetStateAction<number>>,
   totalItems: number,
-  limit: number
+  limit: number,
 ) => {
   const totalPageCalc = Math.ceil(totalItems / limit);
   const handelInfiniteScroll = async () => {

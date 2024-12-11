@@ -24,7 +24,7 @@ const MyShopProductUpdate = ({ product }: any) => {
   const categoriesFields = data?.data;
 
   const [selectedValue, setSelectedValue] = useState(
-    product?.categoryId || categoriesFields?.[0]?.id || ""
+    product?.categoryId || categoriesFields?.[0]?.id || "",
   );
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 

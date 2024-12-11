@@ -47,7 +47,7 @@ const NavbarDropdown = () => {
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
-          <DropdownItem >
+          <DropdownItem>
             <div className="flex gap-2">
               {/* <Avatar src={user?.profilePhoto} /> */}
               <div>
