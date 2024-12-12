@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
@@ -8,7 +9,7 @@ const OrderSummary = () => {
   const [customerProvidedCoupon, setCustomerProvidedCoupon] = useState("");
   const dispatch = useAppDispatch();
   const { totalPrice, grandTotal, discount, selectedItems } = useAppSelector(
-    (store) => store.cart,
+    (store) => store.cart
   );
 
   const handleApplyCoupon = () => {
@@ -35,7 +36,8 @@ const OrderSummary = () => {
           <FaBangladeshiTakaSign size={15} />
         </div>
       </div>
-      <div className="space-x-2">
+      {/* coupon area */}
+      <div className="space-x-2  flex justify-center items-center">
         <input
           className="border p-2 rounded-md"
           placeholder="Enter Coupon Code"
@@ -44,12 +46,22 @@ const OrderSummary = () => {
           onChange={(e) => setCustomerProvidedCoupon(e.target.value)}
         />
         <button
-          className=" py-2 my-2 px-1 border rounded-lg hover:bg-gray-200"
+          className="w-fit py-2 my-2 px-1 border rounded-lg hover:bg-gray-200"
           onClick={handleApplyCoupon}
         >
           Apply Coupon
         </button>
       </div>
+
+      {/* process btn */}
+      <Link href={"/cart/checkout"}>
+        <button
+          className="w-full py-2 my-4 px-6 border rounded-lg hover:bg-gray-200"
+          type="submit"
+        >
+          Confirm Order
+        </button>
+      </Link>
     </div>
   );
 };

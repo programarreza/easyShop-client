@@ -9,12 +9,14 @@ import Rating from "react-rating";
 import { toast } from "sonner";
 
 import Container from "@/src/components/ui/Container";
+import useLoggedUser from "@/src/hooks/auth.hook";
 import { addToCart } from "@/src/redux/features/cartSlice";
 import { useGetSingleProductQuery } from "@/src/redux/features/product/productApi";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { TSearchParams } from "@/src/types";
 
 const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
+  const user = useLoggedUser();
   const dispatch = useAppDispatch();
   const { data } = useGetSingleProductQuery(searchParams?.id || "");
   const product = data?.data;
@@ -25,8 +27,12 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
       : 0;
 
   const handleAddToCart = (product: any) => {
-    dispatch(addToCart(product));
-    toast.success(" Added to cart successfully!", { duration: 2000 });
+    if (user?.role === "CUSTOMER") {
+      dispatch(addToCart(product));
+      toast.success(" Added to cart successfully!", { duration: 2000 });
+    } else {
+      toast.error("product purchase permeation only customers ");
+    }
   };
 
   return (

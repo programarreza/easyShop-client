@@ -29,7 +29,7 @@ const Cart = () => {
           <div className="h-screen bg-[#F2F4F8] flex flex-col justify-center items-center gap-4 ">
             <h2 className="">There are no items in this cart</h2>
             <Link href={"/products"}>
-              <button className="bg-[#b33000]  font-semibold py-1.5 px-2 rounded-lg hover:bg-[#ff4500] transition duration-300 shadow-md hover:shadow-lg">
+              <button className="py-2 my-4 px-6 border rounded-lg hover:bg-gray-200 transition duration-300 shadow-md hover:shadow-lg">
                 Continue shopping
               </button>
             </Link>
