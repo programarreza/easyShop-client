@@ -9,7 +9,7 @@ const OrderSummary = () => {
   const [customerProvidedCoupon, setCustomerProvidedCoupon] = useState("");
   const dispatch = useAppDispatch();
   const { totalPrice, grandTotal, discount, selectedItems } = useAppSelector(
-    (store) => store.cart
+    (store) => store.cart,
   );
 
   const handleApplyCoupon = () => {

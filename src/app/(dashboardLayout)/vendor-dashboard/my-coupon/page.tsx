@@ -1,12 +1,12 @@
 "use client";
 
 import {
-	Table,
-	TableBody,
-	TableCell,
-	TableColumn,
-	TableHeader,
-	TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
 } from "@nextui-org/table";
 import { Tooltip } from "@nextui-org/tooltip";
 import Swal from "sweetalert2";

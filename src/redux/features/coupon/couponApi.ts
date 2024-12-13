@@ -15,7 +15,7 @@ export const couponApi = baseApi.injectEndpoints({
         url: "/coupons",
         method: "DELETE",
       }),
-      invalidatesTags: ["shop", "profile"]
+      invalidatesTags: ["shop", "profile"],
     }),
   }),
 });

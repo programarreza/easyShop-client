@@ -94,7 +94,9 @@ const AllProducts = ({ searchParams }: any) => {
   return (
     <div className="min-h-screen m-1 ">
       <Container>
-        <h2 className="text-center border-b w-fit  text-2xl my-6">All products</h2>
+        <h2 className="text-center border-b w-fit  text-2xl my-6">
+          All products
+        </h2>
         {isLoading && page === 1 ? (
           // Full page loader for initial load
           <div className="flex justify-center items-center h-screen">

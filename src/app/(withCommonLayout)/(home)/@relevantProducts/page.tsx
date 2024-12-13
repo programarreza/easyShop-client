@@ -15,7 +15,7 @@ const RelevantProducts = () => {
   useEffect(() => {
     if (recentProducts && recentProducts.length > 0) {
       const categoryIds = recentProducts.map(
-        (product) => product?.categories?.id
+        (product) => product?.categories?.id,
       );
       const uniqueCategoryIds = Array.from(new Set(categoryIds));
 

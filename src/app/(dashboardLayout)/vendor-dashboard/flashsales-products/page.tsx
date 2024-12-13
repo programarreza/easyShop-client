@@ -113,7 +113,7 @@ const FlashSalesProducts = () => {
                 <TableCell>
                   {product?.price && product?.discount
                     ? (product?.price * (1 - product?.discount / 100)).toFixed(
-                        2
+                        2,
                       )
                     : product?.price}
                 </TableCell>
