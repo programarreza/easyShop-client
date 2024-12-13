@@ -40,3 +40,15 @@ export const couponRows = [
   { name: "END DATE", uid: "end date" },
   { name: "ACTION", uid: "action" }, // delete coupon
 ];
+
+export const myFlashSalesProductsRows = [
+  { name: "IMAGE", uid: "image" },
+  { name: "NAME", uid: "name" },
+  { name: "PRICE", uid: "price" },
+  { name: "DISCOUNT", uid: "discount" },
+  { name: "TOTAL", uid: "total" },
+  { name: "START DATE", uid: "start date" },
+  { name: "END DATE", uid: "end date" },
+  { name: "RATING", uid: "rating" },
+  { name: "ACTION", uid: "action" }, // delete flash sales product
+];

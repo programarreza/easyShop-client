@@ -9,7 +9,39 @@ export const flashSalesApi = baseApi.injectEndpoints({
         body: flashSalesInfo,
       }),
     }),
+
+    getMyFlashSalesProducts: builder.query({
+      query: () => ({
+        url: `/flash-sales/my-flash-sales-products`,
+        method: "GET",
+      }),
+
+      providesTags: ["myFlashSalesProducts"],
+    }),
+
+    getAllFlashSalesProducts: builder.query({
+      query: () => ({
+        url: `/flash-sales`,
+        method: "GET",
+      }),
+
+      providesTags: ["FlashSalesProducts"],
+    }),
+
+    deleteMyFlashSalesProducts: builder.mutation({
+      query: (id) => ({
+        url: `/flash-sales/my-flash-sales-products/${id}`,
+        method: "DELETE",
+      }),
+
+      invalidatesTags: ["myFlashSalesProducts"],
+    }),
   }),
 });
 
-export const { useCreateFlashSalesMutation } = flashSalesApi;
+export const {
+  useCreateFlashSalesMutation,
+  useGetMyFlashSalesProductsQuery,
+  useGetAllFlashSalesProductsQuery,
+  useDeleteMyFlashSalesProductsMutation,
+} = flashSalesApi;

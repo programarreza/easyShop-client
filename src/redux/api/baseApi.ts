@@ -90,6 +90,8 @@ export const baseApi = createApi({
     "myShopProducts",
     "products",
     "shop",
+    "myFlashSalesProducts",
+    "FlashSalesProducts",
   ],
   endpoints: () => ({}),
 });

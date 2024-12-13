@@ -17,11 +17,10 @@ const CreateFlashSales = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const router = useRouter();
-
-  const [createFlashSales] = useCreateFlashSalesMutation();
-
   const { data } = useGetMyShopProductsQuery("");
   const productsFields = data?.data;
+
+  const [createFlashSales] = useCreateFlashSalesMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating...");
@@ -33,8 +32,6 @@ const CreateFlashSales = () => {
         startDate: new Date(startDate).toISOString(),
         endDate: new Date(endDate).toISOString(),
       };
-
-      console.log("flashSalesData", flashSalesData);
 
       const res = await createFlashSales(flashSalesData).unwrap();
 
