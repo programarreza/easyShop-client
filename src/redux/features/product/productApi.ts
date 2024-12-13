@@ -55,6 +55,16 @@ export const shopApi = baseApi.injectEndpoints({
 
       invalidatesTags: ["myShopProducts"],
     }),
+
+    getRelevantProducts: builder.mutation({
+      query: (categoriesData) => ({
+        url: `/products/relevant-products`,
+        method: "POST",
+        body: categoriesData,
+      }),
+
+      invalidatesTags: ["myShopProducts"],
+    }),
   }),
 });
 
@@ -65,4 +75,5 @@ export const {
   useDeleteMyShopProductMutation,
   useGetAllProductsQuery,
   useGetSingleProductQuery,
+  useGetRelevantProductsMutation,
 } = shopApi;

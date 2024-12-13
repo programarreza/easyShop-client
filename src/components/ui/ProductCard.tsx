@@ -31,7 +31,7 @@ const ProductCard = ({ product }: any) => {
     <>
       <Link href={`/products/details?id=${product?.id}`}>
         <div
-          className="rounded-lg shadow-xl flex flex-col justify-between h-72 bg-white"
+          className="rounded-lg shadow-xl flex flex-col justify-between h-72 "
           role="button"
           tabIndex={0} // Makes the element focusable
           onClick={handleViewProduct}

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import Container from "@/src/components/ui/Container";
 import ProductCard from "@/src/components/ui/ProductCard";
 import { useGetAllFlashSalesProductsQuery } from "@/src/redux/features/flashSales/flashSales";
@@ -9,11 +11,21 @@ const FlashSalesSection = () => {
   const flashSalesProducts = data?.data;
 
   return (
-    <div className="min-h-[50vh] m-1 bg-white">
+    <div className="min-h-[50vh] m-1 bg-[#F2F4F8]">
       <Container>
-        <h2 className="text-center border-b w-fit  text-2xl my-6">
-          Flash Sales
-        </h2>
+        <div>
+          <div className="text-center border-b w-full  text-2xl py-8 flex justify-between items-center">
+            <p>Flash Sales</p>
+            <Link href={"/flash-sales"}>
+              <button
+                className="w-fit py-1 my-3 px-6 border-2 rounded-lg hover:bg-gray-200"
+                type="submit"
+              >
+                Shop all products
+              </button>
+            </Link>
+          </div>
+        </div>
         {isLoading ? (
           // Full page loader for initial load
           <div className="flex justify-center items-center h-screen">

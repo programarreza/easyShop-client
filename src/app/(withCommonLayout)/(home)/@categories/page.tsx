@@ -12,26 +12,27 @@ const CategoriesPage = () => {
   const categories = data?.data;
 
   return (
-    <div className="min-h-[50vh] border mt-2 bg-[#F2F4F8] pb-12">
+    <div className="min-h-[50vh] mt-2  pb-12">
       <Container>
         <h2 className="text-center border-b w-fit  text-2xl my-6">
           Categories
         </h2>
-        <div className="grid grid-cols-8 gap-32 ">
+        <div className="grid grid-cols-8 gap-44 ">
           {categories?.map((category: TCategories) => (
             <Link
               key={category?.id}
               href={`/products?category=${category?.name}`}
             >
               <div className="">
-                <div className="border size-40 h-full bg-white">
+                <div className="border size-44 h-full bg-white p-2">
                   <Image
                     alt={category?.name}
-                    height={120}
+                    className="text-center mx-auto"
+                    height={80}
                     src={category?.images}
-                    width={120}
+                    width={80}
                   />
-                  <p>{category?.name}</p>
+                  <p className="text-center">{category?.name}</p>
                 </div>
               </div>
             </Link>
