@@ -139,6 +139,26 @@ const DashboardSidebar = () => {
                 }
               />
               <Tab
+                key="create flash sales"
+                title={
+                  <Link href="/vendor-dashboard/create-flashsales">
+                    <div className="flex items-center space-x-2">
+                      <span>create flash sales</span>
+                    </div>
+                  </Link>
+                }
+              />
+              <Tab
+                key="flash sales products"
+                title={
+                  <Link href="/vendor-dashboard/flashsales-products">
+                    <div className="flex items-center space-x-2">
+                      <span> flash sales products</span>
+                    </div>
+                  </Link>
+                }
+              />
+              <Tab
                 key="order-history"
                 title={
                   <Link href="/vendor-dashboard/order-history">
