@@ -16,6 +16,10 @@ export const siteConfig = {
       label: "Flash Sales",
       href: "/flash-sales",
     },
+    {
+      label: "Resent Products",
+      href: "/resent-products",
+    },
   ],
   navMenuItems: [
     {

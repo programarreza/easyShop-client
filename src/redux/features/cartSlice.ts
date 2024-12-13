@@ -8,6 +8,7 @@ const initialState = {
   grandTotal: 0,
   couponCode: "",
   discount: 0, // Total discount amount
+  recentProducts: [] as any[], // Add recent products to the state
 };
 
 const cartSlice = createSlice({
@@ -150,6 +151,22 @@ const cartSlice = createSlice({
         toast.error("Invalid or expired coupon code.");
       }
     },
+
+    viewProduct: (state, action) => {
+      const product = action.payload;
+      const isAlreadyViewed = state.recentProducts.find(
+        (p) => p.id === product.id
+      );
+
+      if (!isAlreadyViewed) {
+        state.recentProducts.unshift(product);
+
+        // Ensure only the last 10 products are stored
+        if (state.recentProducts.length > 10) {
+          state.recentProducts.pop();
+        }
+      }
+    },
   },
 });
 
@@ -201,6 +218,7 @@ export const {
   removeFromCart,
   clearCart,
   applyCoupon,
+  viewProduct,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

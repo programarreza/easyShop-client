@@ -5,8 +5,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaRegStar, FaStar } from "react-icons/fa6";
 import Rating from "react-rating";
+import { useDispatch } from "react-redux";
+
+import { viewProduct } from "@/src/redux/features/cartSlice";
 
 const ProductCard = ({ product }: any) => {
+  const dispatch = useDispatch();
+
+  const handleViewProduct = () => {
+    dispatch(viewProduct(product)); // Dispatch the viewProduct action
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      handleViewProduct();
+    }
+  };
+
   const discountedPrice =
     product?.price && product?.discount
       ? product?.price * (1 - product?.discount / 100)
@@ -15,7 +30,13 @@ const ProductCard = ({ product }: any) => {
   return (
     <>
       <Link href={`/products/details?id=${product?.id}`}>
-        <div className="rounded-lg shadow-xl flex flex-col justify-between h-72 bg-white">
+        <div
+          className="rounded-lg shadow-xl flex flex-col justify-between h-72 bg-white"
+          role="button"
+          tabIndex={0} // Makes the element focusable
+          onClick={handleViewProduct}
+          onKeyDown={handleKeyDown}
+        >
           <div className="relative h-[150px] overflow-hidden">
             <Image
               alt="Product image"
