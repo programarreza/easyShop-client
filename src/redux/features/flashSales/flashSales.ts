@@ -11,9 +11,10 @@ export const flashSalesApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // done
     getMyFlashSalesProducts: builder.query({
       query: () => ({
-        url: `/flash-sales/my-flash-sales-products`,
+        url: `/products/my-flash-sales-products`,
         method: "GET",
       }),
 
@@ -31,7 +32,7 @@ export const flashSalesApi = baseApi.injectEndpoints({
 
     deleteMyFlashSalesProducts: builder.mutation({
       query: (id) => ({
-        url: `/flash-sales/my-flash-sales-products/${id}`,
+        url: `/products/my-flash-sales-products/${id}`,
         method: "DELETE",
       }),
 

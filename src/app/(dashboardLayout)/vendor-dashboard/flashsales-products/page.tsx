@@ -93,7 +93,7 @@ const FlashSalesProducts = () => {
                     avatarProps={{
                       size: "lg",
                       radius: "sm",
-                      src: product?.product?.images,
+                      src: product?.images,
                     }}
                     className=" "
                     description=""
@@ -102,23 +102,25 @@ const FlashSalesProducts = () => {
                 </TableCell>
                 <TableCell>
                   {" "}
-                  {product?.product?.name.length > 20
-                    ? `${product?.product?.name.substring(0, 20)}...`
-                    : product?.product?.name}
+                  {product?.name.length > 20
+                    ? `${product?.name.substring(0, 20)}...`
+                    : product?.name}
                 </TableCell>
 
-                <TableCell>{product?.product?.price}</TableCell>
+                <TableCell>{product?.price}</TableCell>
 
-                <TableCell>{product?.discount}</TableCell>
+                <TableCell>{product?.discount}%</TableCell>
                 <TableCell>
-                  {product?.product?.price && product?.discount
-                    ? product?.product?.price * (1 - product?.discount / 100)
-                    : product?.product?.price}
+                  {product?.price && product?.discount
+                    ? (product?.price * (1 - product?.discount / 100)).toFixed(
+                        2
+                      )
+                    : product?.price}
                 </TableCell>
 
                 <TableCell>{formatDate(product?.startDate)}</TableCell>
                 <TableCell>{formatDate(product?.endDate)}</TableCell>
-                <TableCell>{product?.product?.rating}</TableCell>
+                <TableCell>{product?.rating}</TableCell>
 
                 <TableCell>
                   {/* Delete flash sales Product */}
