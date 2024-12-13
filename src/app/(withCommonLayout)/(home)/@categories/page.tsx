@@ -12,9 +12,12 @@ const CategoriesPage = () => {
   const categories = data?.data;
 
   return (
-    <div className="min-h-[90vh] border border-yellow-500 mt-2 bg-[#F2F4F8]">
+    <div className="min-h-[50vh] border mt-2 bg-[#F2F4F8] pb-12">
       <Container>
-        <div className="grid grid-cols-8 gap-32">
+        <h2 className="text-center border-b w-fit  text-2xl my-6">
+          Categories
+        </h2>
+        <div className="grid grid-cols-8 gap-32 ">
           {categories?.map((category: TCategories) => (
             <Link
               key={category?.id}

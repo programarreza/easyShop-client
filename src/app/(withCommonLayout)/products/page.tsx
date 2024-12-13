@@ -14,13 +14,13 @@ const AllProducts = ({ searchParams }: any) => {
   const [error, setError] = useState<string | null>(null);
   const [total, setTotal] = useState(0);
   const [noProductsMessage, setNoProductsMessage] = useState<string | null>(
-    null
+    null,
   );
 
   const fetchProducts = async (
     page: number,
     pageSize: number,
-    category?: string
+    category?: string,
   ) => {
     setIsLoading(true);
     setError(null);
@@ -30,7 +30,7 @@ const AllProducts = ({ searchParams }: any) => {
       const res = await fetch(
         `http://localhost:5000/api/v1/products?page=${page}&limit=${pageSize}${
           category ? `&categories=${category}` : ""
-        }`
+        }`,
       );
 
       if (!res.ok) {
@@ -94,6 +94,7 @@ const AllProducts = ({ searchParams }: any) => {
   return (
     <div className="min-h-screen m-1">
       <Container>
+        <h2 className="text-center border-b w-fit  text-2xl my-6">All products</h2>
         {isLoading && page === 1 ? (
           // Full page loader for initial load
           <div className="flex justify-center items-center h-screen">
@@ -109,7 +110,7 @@ const AllProducts = ({ searchParams }: any) => {
                 <p className="text-xl text-red-500">{noProductsMessage}</p>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-5 py-24 min-h-screen">
+              <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-5 pb-24 min-h-screen">
                 {contents?.map((product: any) => (
                   <ProductCard key={product.id} product={product} />
                 ))}

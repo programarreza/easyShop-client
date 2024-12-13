@@ -21,15 +21,17 @@ export const flashSalesApi = baseApi.injectEndpoints({
       providesTags: ["myFlashSalesProducts"],
     }),
 
+    // done
     getAllFlashSalesProducts: builder.query({
       query: () => ({
-        url: `/flash-sales`,
+        url: `/products/flash-sales-products`,
         method: "GET",
       }),
 
       providesTags: ["FlashSalesProducts"],
     }),
 
+    // done
     deleteMyFlashSalesProducts: builder.mutation({
       query: (id) => ({
         url: `/products/my-flash-sales-products/${id}`,
