@@ -26,14 +26,14 @@ const CreateFlashSales = () => {
     const toastId = toast.loading("Creating...");
 
     try {
-      const flashSalesData = {
-        productId: selectedValue,
-        discount: Number(data.discount),
+      const flashSalesProductData = {
+        id: selectedValue,
+        discount: Number(data.discount || 0),
         startDate: new Date(startDate).toISOString(),
         endDate: new Date(endDate).toISOString(),
       };
 
-      const res = await createFlashSales(flashSalesData).unwrap();
+      const res = await createFlashSales(flashSalesProductData).unwrap();
 
       if (res.success) {
         router.push("/vendor-dashboard/flashsales-products");

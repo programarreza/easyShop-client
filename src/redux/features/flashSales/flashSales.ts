@@ -2,9 +2,10 @@ import { baseApi } from "../../api/baseApi";
 
 export const flashSalesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // done
     createFlashSales: builder.mutation({
       query: (flashSalesInfo) => ({
-        url: `/flash-sales/create`,
+        url: `/products/flash-sales-create`,
         method: "POST",
         body: flashSalesInfo,
       }),

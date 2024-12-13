@@ -20,7 +20,6 @@ import useLoggedUser from "@/src/hooks/auth.hook";
 import { useAppSelector } from "@/src/redux/hooks";
 
 export const Navbar = () => {
-  // const { selectedItems } = useAppSelector((store) => store?.cart);
   const { selectedItems } = useAppSelector((store) => store?.cart);
 
   const loggedUser = useLoggedUser();
@@ -92,7 +91,7 @@ export const Navbar = () => {
                     className={clsx(
                       " mt-2", // Default text color set to white
                       linkStyles({ color: "foreground" }),
-                      "data-[active=true]:text-primary data-[active=true]:font-medium",
+                      "data-[active=true]:text-primary data-[active=true]:font-medium"
                     )}
                     color="foreground"
                     href={item.href}
