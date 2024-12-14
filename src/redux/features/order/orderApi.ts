@@ -20,8 +20,20 @@ export const orderApi = baseApi.injectEndpoints({
 
       providesTags: ["customerOrdersHistory"],
     }),
+
+    getMyCustomerOrdersHistory: builder.query({
+      query: () => ({
+        url: `/orders/my-customer-history`,
+        method: "GET",
+      }),
+
+      providesTags: ["myCustomersOrdersHistory"],
+    }),
   }),
 });
 
-export const { useCreateOrderMutation, useGetCustomerOrdersHistoryQuery } =
-  orderApi;
+export const {
+  useCreateOrderMutation,
+  useGetCustomerOrdersHistoryQuery,
+  useGetMyCustomerOrdersHistoryQuery,
+} = orderApi;

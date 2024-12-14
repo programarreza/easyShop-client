@@ -51,7 +51,7 @@ const CustomerOrderHistoryPage = () => {
 
           <TableBody className="bg-white">
             {customerOrders?.map((customerOrder: any, index: number) => (
-              <TableRow key={customerOrder?.id} className="bg-white">
+              <TableRow key={customerOrder?.id} className="bg-white  border-b">
                 <TableCell width={20}>{index + 1}</TableCell>
 
                 <TableCell className="flex gap-1 items-center mt-2">
