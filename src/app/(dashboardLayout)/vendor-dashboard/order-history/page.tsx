@@ -1,5 +1,7 @@
-const OrderHistoryPage = () => {
-  return <div>OrderHistoryPage</div>;
+"use client";
+
+const VendorOrderHistoryPage = () => {
+  return <div>VendorOrderHistoryPage</div>;
 };
 
-export default OrderHistoryPage;
+export default VendorOrderHistoryPage;

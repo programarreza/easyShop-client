@@ -28,6 +28,8 @@ const CheckoutPage = () => {
 
   const couponDiscount = products[0]?.shop?.coupon?.discount;
 
+  console.log("Discount Amount", discount)
+
   // Transform the products array
   const transformedProducts = Array.isArray(products)
     ? products.map((product) => ({
@@ -52,7 +54,7 @@ const CheckoutPage = () => {
     const orderData = {
       shopId,
       totalPrice: Number(totalPrice),
-      discountedAmount: Number(discount?.toFixed(2)),
+      discountedAmount: Number(discount?.toFixed(2) || 0),
       discount: Number(couponDiscount) || 0,
       grandTotal: Number(grandTotal),
       items: transformedProducts,

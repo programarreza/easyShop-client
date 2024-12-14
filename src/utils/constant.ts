@@ -52,3 +52,23 @@ export const myFlashSalesProductsRows = [
   { name: "RATING", uid: "rating" },
   { name: "ACTION", uid: "action" }, // delete flash sales product
 ];
+
+export const customerOrdersHistoryRows = [
+  { name: "SL", uid: "sl" },
+  { name: "TOTAL", uid: "total" },
+  { name: "COUPON DISCOUNT", uid: "coupon discount" },
+  { name: "STATUS", uid: "status" },
+  { name: "ORDER DATE", uid: "order date" },
+  { name: "TRANSACTION ID", uid: "transaction id" },
+  { name: "SHOP NAME", uid: "shop name" },
+  { name: "ACTION", uid: "action" }, // delete flash sales product
+];
+
+export const customerOrdersHistoryDetailsRows = [
+  { name: "SL", uid: "sl" },
+  { name: "IMAGE", uid: "image" },
+  { name: "NAME", uid: "name" },
+  { name: "PRICE", uid: "price" },
+  { name: "DISCOUNT", uid: "discount" },
+  { name: "GRAND TOTAL", uid: "grand total" },
+];
