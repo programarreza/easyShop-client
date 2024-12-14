@@ -8,6 +8,7 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { usePathname, useRouter } from "next/navigation";
+import Cookies from "universal-cookie";
 
 import useLoggedUser from "@/src/hooks/auth.hook";
 import { logout } from "@/src/redux/features/auth/authSlice";
@@ -20,9 +21,13 @@ const NavbarDropdown = () => {
   const user = useLoggedUser();
   const dispatch = useAppDispatch();
 
+  const cookies = new Cookies();
+
   const handleLogout = () => {
+    // Remove the accessToken cookie
+    cookies.remove("accessToken", { path: "/" });
+
     dispatch(logout());
-    router.push("/");
   };
 
   const handleNavigation = (pathname: string) => {

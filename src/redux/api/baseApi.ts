@@ -11,6 +11,8 @@ import { toast } from "sonner";
 import { logout, setUser } from "../features/auth/authSlice";
 import { RootState } from "../store/store";
 
+import { setCookie } from "@/src/utils/cookiesUtils";
+
 interface ErrorResponse {
   status: number;
   data: {
@@ -26,6 +28,7 @@ const baseQuery = fetchBaseQuery({
 
     if (token) {
       headers.set("authorization", `${token}`);
+      setCookie("accessToken", token, { maxAge: 3600 });
     }
 
     return headers;

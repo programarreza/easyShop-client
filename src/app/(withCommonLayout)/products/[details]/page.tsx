@@ -27,12 +27,12 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
       : 0;
 
   const handleAddToCart = (product: any) => {
-    if (user?.role === "CUSTOMER") {
-      dispatch(addToCart(product));
-      toast.success(" Added to cart successfully!", { duration: 2000 });
-    } else {
-      toast.error("product purchase permeation only customers ");
-    }
+    // if (user?.role === "CUSTOMER") {
+    dispatch(addToCart(product));
+    toast.success(" Added to cart successfully!", { duration: 2000 });
+    // } else {
+    // toast.error("product purchase permeation only customers ");
+    // }
   };
 
   return (

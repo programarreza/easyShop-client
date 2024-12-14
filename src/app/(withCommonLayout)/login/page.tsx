@@ -3,7 +3,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -14,13 +14,18 @@ import { setUser } from "@/src/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/src/redux/hooks";
 import loginValidationSchema from "@/src/schemas/login.schema";
 import { TUser } from "@/src/types";
+import { setCookie } from "@/src/utils/cookiesUtils";
 import { verifyToken } from "@/src/utils/verifyToken";
 
 const LoginPage = () => {
-  const router = useRouter();
-
+  const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
-  const [login] = useLoginMutation();
+  const [login, { isLoading, isSuccess }] = useLoginMutation();
+
+  const router = useRouter();
+  const redirect = searchParams.get("redirect");
+
+  console.log({ redirect });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Logging in");
@@ -35,8 +40,9 @@ const LoginPage = () => {
       const user = verifyToken(res?.data?.accessToken) as TUser;
 
       if (res.success) {
+        setCookie("accessToken", res?.data?.accessToken, { maxAge: 3600 });
         dispatch(setUser({ user: user, token: res?.data?.accessToken }));
-        router.push("/");
+
         toast.success("Logged in", { id: toastId, duration: 1000 });
       }
     } catch (error: any) {
@@ -46,6 +52,14 @@ const LoginPage = () => {
       });
     }
   };
+
+  if (!isLoading && isSuccess) {
+    if (redirect) {
+      router.push(redirect);
+    } else {
+      router.push("/");
+    }
+  }
 
   return (
     <div className=" text-black bg-[#F2F4F8]">
