@@ -9,6 +9,7 @@ import { toast } from "sonner";
 
 import RWForm from "@/src/components/form/RWForm";
 import RWInput from "@/src/components/form/RWInput";
+import useLoggedUser from "@/src/hooks/auth.hook";
 import { useLoginMutation } from "@/src/redux/features/auth/authApi";
 import { setUser } from "@/src/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/src/redux/hooks";
@@ -21,11 +22,10 @@ const LoginPage = () => {
   const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
   const [login, { isLoading, isSuccess }] = useLoginMutation();
+  const { refetch } = useLoggedUser();
 
   const router = useRouter();
   const redirect = searchParams.get("redirect");
-
-  console.log({ redirect });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Logging in");
@@ -44,6 +44,7 @@ const LoginPage = () => {
         dispatch(setUser({ user: user, token: res?.data?.accessToken }));
 
         toast.success("Logged in", { id: toastId, duration: 1000 });
+        refetch();
       }
     } catch (error: any) {
       toast.error(error?.data?.message || "Something went wrong", {

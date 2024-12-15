@@ -18,15 +18,13 @@ const NavbarDropdown = () => {
   let userPath: string;
   const router = useRouter();
   const pathname = usePathname();
-  const user = useLoggedUser();
+  const { user } = useLoggedUser();
   const dispatch = useAppDispatch();
-
   const cookies = new Cookies();
 
   const handleLogout = () => {
     // Remove the accessToken cookie
     cookies.remove("accessToken", { path: "/" });
-
     dispatch(logout());
   };
 

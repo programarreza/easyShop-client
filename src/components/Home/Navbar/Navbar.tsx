@@ -22,7 +22,7 @@ import { useAppSelector } from "@/src/redux/hooks";
 export const Navbar = () => {
   const { selectedItems } = useAppSelector((store) => store?.cart);
 
-  const loggedUser = useLoggedUser();
+  const { user, selectedUser } = useLoggedUser();
   const [isOpen, setIsOpen] = useState(false);
   const [scrollDirection, setScrollDirection] = useState("up");
 
@@ -50,7 +50,7 @@ export const Navbar = () => {
   }, [scrollDirection]);
 
   const getDashboardLink = () => {
-    switch (loggedUser?.role as unknown as "ADMIN" | "VENDOR" | "CUSTOMER") {
+    switch (selectedUser?.role as unknown as "ADMIN" | "VENDOR" | "CUSTOMER") {
       case "ADMIN":
         return "/admin-dashboard";
       case "VENDOR":
@@ -91,7 +91,7 @@ export const Navbar = () => {
                     className={clsx(
                       " mt-2", // Default text color set to white
                       linkStyles({ color: "foreground" }),
-                      "data-[active=true]:text-primary data-[active=true]:font-medium",
+                      "data-[active=true]:text-primary data-[active=true]:font-medium"
                     )}
                     color="foreground"
                     href={item.href}
@@ -111,7 +111,7 @@ export const Navbar = () => {
               </Link>
 
               <Link href={getDashboardLink()}>
-                {loggedUser ? (
+                {selectedUser ? (
                   <div className="flex justify-center items-center gap-2">
                     <NavbarDropdown />
                   </div>
