@@ -17,9 +17,7 @@ import { customerOrdersHistoryRows } from "@/src/utils/constant";
 const AllShopsOrdersHistory = () => {
   const { data } = useGetAllShopsOrdersHistoryQuery("");
 
-  console.log("first", data?.data);
-
-  const myCustomerOrders = data?.data;
+  const allShopsOrders = data?.data;
 
   // Format the validFrom and validTo dates
   const formatDate = (date: string) => {
@@ -34,7 +32,7 @@ const AllShopsOrdersHistory = () => {
 
   return (
     <div className="bg-[#F9FBFD]">
-      {myCustomerOrders?.length === 0 ? (
+      {allShopsOrders?.length === 0 ? (
         <p className="flex justify-center items-center min-h-screen my-auto text-xl font-medium">
           orders not aboailvale
         </p>
@@ -53,7 +51,7 @@ const AllShopsOrdersHistory = () => {
           </TableHeader>
 
           <TableBody className="bg-white">
-            {myCustomerOrders?.map((customerOrder: any, index: number) => (
+            {allShopsOrders?.map((customerOrder: any, index: number) => (
               <TableRow key={customerOrder?.id} className="bg-white  border-b">
                 <TableCell width={20}>{index + 1}</TableCell>
 

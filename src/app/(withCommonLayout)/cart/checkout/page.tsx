@@ -22,13 +22,11 @@ import { useAppSelector } from "@/src/redux/hooks";
 const CheckoutPage = () => {
   const [createOrder, { isLoading }] = useCreateOrderMutation();
   const dispatch = useDispatch();
-  const user = useLoggedUser();
+  const { user } = useLoggedUser();
   const { totalPrice, grandTotal, discount, selectedItems, products } =
     useAppSelector((store) => store.cart);
 
   const couponDiscount = products[0]?.shop?.coupon?.discount;
-
-  console.log("Discount Amount", discount)
 
   // Transform the products array
   const transformedProducts = Array.isArray(products)
