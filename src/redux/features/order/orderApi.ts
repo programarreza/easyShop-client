@@ -29,6 +29,15 @@ export const orderApi = baseApi.injectEndpoints({
 
       providesTags: ["myCustomersOrdersHistory"],
     }),
+
+    getAllShopsOrdersHistory: builder.query({
+      query: () => ({
+        url: `/orders/shops-orders-history`,
+        method: "GET",
+      }),
+
+      providesTags: ["shopsOrdersHistory"],
+    }),
   }),
 });
 
@@ -36,4 +45,5 @@ export const {
   useCreateOrderMutation,
   useGetCustomerOrdersHistoryQuery,
   useGetMyCustomerOrdersHistoryQuery,
+  useGetAllShopsOrdersHistoryQuery,
 } = orderApi;
