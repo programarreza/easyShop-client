@@ -72,7 +72,7 @@ const UsersPage = () => {
 
         <TableBody className="bg-white">
           {users?.map((user: any, index: number) => (
-            <TableRow key={user?.id} className="bg-white">
+            <TableRow key={user?.id} className="bg-white border-b">
               {/* <TableCell width={20}>{index + 1}</TableCell> */}
               <TableCell>
                 <User

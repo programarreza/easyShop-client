@@ -58,14 +58,14 @@ const CreateProductPage = () => {
           <div className="hero">
             <div className=" flex flex-col md:flex-row  rounded-xl justify-between">
               {/* form area */}
-              <div className="lg:w-[800px] bg-white border rounded-xl px-12 mt-14">
+              <div className="md:w-[450px] lg:w-[800px] bg-white border rounded-xl px-12 mt-14">
                 <div className="text-center py-8 text-2xl font-semibold">
                   <h3>create product</h3>
                 </div>
 
                 <RWForm onSubmit={onSubmit}>
                   {/* name and description */}
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid lg:grid-cols-2 gap-3">
                     <div className="py-1">
                       <RWInput label="Name" name="name" type="text" />
                     </div>
@@ -79,7 +79,7 @@ const CreateProductPage = () => {
                   </div>
 
                   {/* price and discount */}
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid lg:grid-cols-2 gap-3">
                     <div className="py-1">
                       <RWInput label="Price" name="price" type="number" />
                     </div>
@@ -93,7 +93,7 @@ const CreateProductPage = () => {
                   </div>
 
                   {/* inventoryCount and categoryId */}
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid lg:grid-cols-2 gap-3">
                     <div className="py-1">
                       <RWInput
                         label="Inventory Count"

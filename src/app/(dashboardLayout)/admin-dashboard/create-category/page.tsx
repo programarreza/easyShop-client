@@ -53,7 +53,7 @@ const CreateCategoryPage = () => {
                 </div>
 
                 <RWForm onSubmit={onSubmit}>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid lg:grid-cols-2 gap-3">
                     <div className="py-1">
                       <RWInput label="Name" name="name" type="text" />
                     </div>

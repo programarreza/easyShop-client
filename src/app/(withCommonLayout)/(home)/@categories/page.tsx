@@ -17,14 +17,14 @@ const CategoriesPage = () => {
         <h2 className="text-center border-b w-fit  text-2xl my-6">
           Categories
         </h2>
-        <div className="grid grid-cols-8 gap-44 ">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5  xl:grid-cols-8  gap-6">
           {categories?.map((category: TCategories) => (
             <Link
               key={category?.id}
               href={`/products?category=${category?.name}`}
             >
               <div className="">
-                <div className="border size-44 h-full bg-white p-2">
+                <div className="border size-44 h-full bg-white p-2 ">
                   <Image
                     alt={category?.name}
                     className="text-center mx-auto"

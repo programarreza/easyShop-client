@@ -62,7 +62,7 @@ const CreateFlashSales = () => {
               {/* form area */}
               <div className="lg:w-[550px] bg-white border rounded-xl px-12">
                 <div className="text-center py-2 text-2xl font-semibold">
-                  <h3>Create Sales product</h3>
+                  <h3>Create Flash Sales product</h3>
                 </div>
                 <RWForm onSubmit={onSubmit}>
                   <div className="">

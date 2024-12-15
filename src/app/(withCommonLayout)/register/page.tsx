@@ -63,7 +63,7 @@ const RegisterPage = () => {
                   resolver={zodResolver(registerValidationSchema)}
                   onSubmit={onSubmit}
                 >
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid md:grid-cols-2 gap-3">
                     <div className="py-1">
                       <RWInput label="Name" name="name" type="text" />
                     </div>

@@ -6,11 +6,11 @@ import Link from "next/link";
 import useLoggedUser from "@/src/hooks/auth.hook";
 
 const DashboardSidebar = () => {
-  const loggedUser = useLoggedUser();
+  const { selectedUser } = useLoggedUser();
 
   return (
     <div>
-      <div className="w-full min-h-screen ">
+      <div className=" w-full min-h-screen ">
         <Tabs
           aria-label="Options"
           classNames={{
@@ -25,8 +25,10 @@ const DashboardSidebar = () => {
           variant="underlined"
         >
           {/* admin accusable tab */}
-          {(loggedUser?.role as unknown as "ADMIN" | "VENDOR" | "CUSTOMER") ===
-            "ADMIN" && (
+          {(selectedUser?.role as unknown as
+            | "ADMIN"
+            | "VENDOR"
+            | "CUSTOMER") === "ADMIN" && (
             <>
               <Tab
                 key="admin-dashboard"
@@ -75,8 +77,10 @@ const DashboardSidebar = () => {
           )}
 
           {/* vendor accusable tab */}
-          {(loggedUser?.role as unknown as "ADMIN" | "VENDOR" | "CUSTOMER") ===
-            "VENDOR" && (
+          {(selectedUser?.role as unknown as
+            | "ADMIN"
+            | "VENDOR"
+            | "CUSTOMER") === "VENDOR" && (
             <>
               <Tab
                 key="vendor-dashboard"
@@ -171,13 +175,25 @@ const DashboardSidebar = () => {
             </>
           )}
 
-          {(loggedUser?.role as unknown as "ADMIN" | "VENDOR" | "CUSTOMER") ===
-            "CUSTOMER" && (
+          {(selectedUser?.role as unknown as
+            | "ADMIN"
+            | "VENDOR"
+            | "CUSTOMER") === "CUSTOMER" && (
             <>
+              <Tab
+                key="dashboard"
+                title={
+                  <Link href="/dashboard">
+                    <div className="flex items-center space-x-2">
+                      <span>dashboard</span>
+                    </div>
+                  </Link>
+                }
+              />
               <Tab
                 key="my reviews"
                 title={
-                  <Link href="/my-reviews">
+                  <Link href="/dashboard/my-reviews">
                     <div className="flex items-center space-x-2">
                       <span>my reviews</span>
                     </div>

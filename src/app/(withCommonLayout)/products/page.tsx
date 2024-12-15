@@ -112,7 +112,7 @@ const AllProducts = ({ searchParams }: any) => {
                 <p className="text-xl text-red-500">{noProductsMessage}</p>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-5 pb-24 min-h-screen">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6  gap-5 pb-24 min-h-screen">
                 {contents?.map((product: any) => (
                   <ProductCard key={product.id} product={product} />
                 ))}

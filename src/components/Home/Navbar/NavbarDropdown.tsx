@@ -26,6 +26,8 @@ const NavbarDropdown = () => {
     // Remove the accessToken cookie
     cookies.remove("accessToken", { path: "/" });
     dispatch(logout());
+
+    router.push("/");
   };
 
   const handleNavigation = (pathname: string) => {
@@ -33,11 +35,11 @@ const NavbarDropdown = () => {
   };
 
   if (user?.role === "ADMIN") {
-    userPath = "admin-dashboard";
+    userPath = "/admin-dashboard";
   } else if (user?.role === "VENDOR") {
-    userPath = "vendor-dashboard";
+    userPath = "/vendor-dashboard";
   } else if (user?.role === "CUSTOMER") {
-    userPath = "dashboard";
+    userPath = "/dashboard";
   }
 
   return (

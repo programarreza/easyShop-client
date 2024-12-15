@@ -17,7 +17,7 @@ import { couponRows } from "@/src/utils/constant";
 
 const MyCouponPage = () => {
   const [deleteCoupon] = useDeleteCouponMutation();
-  const user = useLoggedUser();
+  const { user } = useLoggedUser();
   const couponData = user?.shop?.coupon;
 
   const handleDelete = (id: string) => {

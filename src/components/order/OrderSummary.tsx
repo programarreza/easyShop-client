@@ -37,7 +37,7 @@ const OrderSummary = () => {
         </div>
       </div>
       {/* coupon area */}
-      <div className="space-x-2  flex justify-center items-center">
+      <div className="space-x-2  flex items-center">
         <input
           className="border p-2 rounded-md"
           placeholder="Enter Coupon Code"

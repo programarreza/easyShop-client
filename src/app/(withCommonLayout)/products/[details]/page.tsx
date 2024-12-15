@@ -4,6 +4,7 @@
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FaRegStar, FaStar } from "react-icons/fa6";
 import Rating from "react-rating";
 import { toast } from "sonner";
@@ -16,7 +17,8 @@ import { useAppDispatch } from "@/src/redux/hooks";
 import { TSearchParams } from "@/src/types";
 
 const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
-  const user = useLoggedUser();
+  const { user, selectedUser } = useLoggedUser();
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const { data } = useGetSingleProductQuery(searchParams?.id || "");
   const product = data?.data;
@@ -27,12 +29,16 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
       : 0;
 
   const handleAddToCart = (product: any) => {
-    // if (user?.role === "CUSTOMER") {
-    dispatch(addToCart(product));
-    toast.success(" Added to cart successfully!", { duration: 2000 });
-    // } else {
-    // toast.error("product purchase permeation only customers ");
-    // }
+    if (selectedUser) {
+      if (user.role === "CUSTOMER") {
+        dispatch(addToCart(product));
+        toast.success(" Added to cart successfully!", { duration: 2000 });
+      } else {
+        toast.error("product purchase permeation only customers ");
+      }
+    } else {
+      router.push("/login");
+    }
   };
 
   return (
