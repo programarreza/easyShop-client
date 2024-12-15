@@ -1,11 +1,13 @@
 "use client";
 import { Input } from "@nextui-org/input";
+import { Select, SelectItem } from "@nextui-org/select";
 import { useEffect, useState } from "react";
 
 import { SearchIcon } from "@/src/components/icons";
 import Container from "@/src/components/ui/Container";
 import ProductCard from "@/src/components/ui/ProductCard";
 import useInfiniteScroll from "@/src/hooks/infinityScroll";
+import { useGetCategoriesQuery } from "@/src/redux/features/categories/categoriesApi";
 import { TProduct } from "@/src/types";
 
 const AllProducts = ({ searchParams }: any) => {
@@ -19,6 +21,9 @@ const AllProducts = ({ searchParams }: any) => {
   const [noProductsMessage, setNoProductsMessage] = useState<string | null>(
     null
   );
+  const [filters, setFilters] = useState("");
+  const { data } = useGetCategoriesQuery("");
+  const categoriesFields = data?.data;
 
   const fetchProducts = async (
     page: number,
@@ -33,7 +38,7 @@ const AllProducts = ({ searchParams }: any) => {
       const res = await fetch(
         `http://localhost:5000/api/v1/products?page=${page}&limit=${pageSize}${
           category ? `&categories=${category}` : ""
-        }${searchValue ? `&searchTerm=${searchValue}` : ""}
+        }${searchValue ? `&searchTerm=${searchValue}` : ""}${filters ? `&categories=${filters}` : ""}
           `
       );
 
@@ -90,7 +95,7 @@ const AllProducts = ({ searchParams }: any) => {
     };
 
     loadProducts();
-  }, [page, pageSize, searchParams?.category, searchValue]);
+  }, [page, pageSize, searchParams?.category, searchValue, filters]);
 
   // Set up infinite scroll
   useInfiniteScroll(page, setPage, total, pageSize);
@@ -135,6 +140,32 @@ const AllProducts = ({ searchParams }: any) => {
               }
               onChange={(e: any) => setSearchValue(e.target.value)}
             />
+          </div>
+
+          {/* filter category */}
+          <div className="w-[200px] hidden md:flex">
+            <Select
+              className=""
+              items={[{ name: "All Categories" }, ...(categoriesFields || [])]}
+              label="Select My Products"
+              selectedKeys={new Set([filters])}
+              size="sm"
+              variant="bordered"
+              onSelectionChange={(keys) => {
+                const selected = Array.from(keys).join("");
+
+                if (selected === "All Categories") {
+                  setFilters(""); // Reset filters
+                } else {
+                  setFilters(selected);
+                }
+              }}
+            >
+              <SelectItem key="All Categories">All Categories</SelectItem>
+              {(categoriesFields || []).map((item: any) => (
+                <SelectItem key={item?.name}>{item?.name}</SelectItem>
+              ))}
+            </Select>
           </div>
         </div>
         {isLoading && page === 1 ? (
