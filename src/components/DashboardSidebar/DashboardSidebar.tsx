@@ -182,6 +182,16 @@ const DashboardSidebar = () => {
                   </Link>
                 }
               />
+              <Tab
+                key="my-product-reviews"
+                title={
+                  <Link href="/vendor-dashboard/my-product-reviews">
+                    <div className="flex items-center space-x-2">
+                      <span>my product reviews</span>
+                    </div>
+                  </Link>
+                }
+              />
             </>
           )}
 
