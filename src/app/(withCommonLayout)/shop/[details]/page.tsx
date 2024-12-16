@@ -19,7 +19,7 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
 
   // get shop data
   const { data, isLoading: shopLoading } = useGetSingleShopQuery(
-    searchParams?.id,
+    searchParams?.id
   );
   const shopData = data?.data;
   const couponData = shopData?.coupon;
@@ -27,16 +27,16 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
   const fetchProducts = async (
     page: number,
     pageSize: number,
-    category?: string,
+    category?: string
   ) => {
     setIsLoading(true);
     setError(null);
 
     try {
       const res = await fetch(
-        `https://easyshopserver.vercel.app/api/v1/products/${searchParams?.id}/shop-product?page=${page}&limit=${pageSize}${
+        `http://localhost:5000/api/v1/products/${searchParams?.id}/shop-product?page=${page}&limit=${pageSize}${
           category ? `&categories=${category}` : ""
-        }`,
+        }`
       );
 
       if (!res.ok) {

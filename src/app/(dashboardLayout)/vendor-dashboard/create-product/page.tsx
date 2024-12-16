@@ -58,7 +58,7 @@ const CreateProductPage = () => {
           <div className="hero">
             <div className=" flex flex-col md:flex-row  rounded-xl justify-between">
               {/* form area */}
-              <div className="md:w-[450px] lg:w-[800px] bg-white border rounded-xl px-12 mt-14">
+              <div className="lg:w-[800px] bg-white border rounded-xl px-12 mt-14">
                 <div className="text-center py-8 text-2xl font-semibold">
                   <h3>create product</h3>
                 </div>

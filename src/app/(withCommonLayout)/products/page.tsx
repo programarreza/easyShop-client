@@ -20,7 +20,7 @@ const AllProducts = ({ searchParams }: any) => {
   const [error, setError] = useState<string | null>(null);
   const [total, setTotal] = useState(0);
   const [noProductsMessage, setNoProductsMessage] = useState<string | null>(
-    null,
+    null
   );
   const [filters, setFilters] = useState("");
   const { data } = useGetCategoriesQuery("");
@@ -29,7 +29,7 @@ const AllProducts = ({ searchParams }: any) => {
   const fetchProducts = async (
     page: number,
     pageSize: number,
-    category?: string,
+    category?: string
   ) => {
     setIsLoading(true);
     setError(null);
@@ -37,10 +37,10 @@ const AllProducts = ({ searchParams }: any) => {
 
     try {
       const res = await fetch(
-        `https://easyshopserver.vercel.app/api/v1/products?page=${page}&limit=${pageSize}${
+        `http://localhost:5000/api/v1/products?page=${page}&limit=${pageSize}${
           category ? `&categories=${category}` : ""
         }${searchValue ? `&searchTerm=${searchValue}` : ""}${filters ? `&categories=${filters}` : ""}
-          `,
+          `
       );
 
       if (!res.ok) {
