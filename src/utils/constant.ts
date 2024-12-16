@@ -73,3 +73,12 @@ export const customerOrdersHistoryDetailsRows = [
   { name: "GRAND TOTAL", uid: "grand total" },
   { name: "ACTION", uid: "action" },
 ];
+
+export const myReviewsRows = [
+  { name: "SL", uid: "sl" },
+  { name: "IMAGE", uid: "image" },
+  { name: "PRODUCT NAME", uid: "product name" },
+  { name: "RATING", uid: "rating" },
+  { name: "REVIEW TEXT", uid: "review text" },
+  { name: "DATE", uid: "date" },
+];

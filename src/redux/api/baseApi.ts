@@ -98,6 +98,7 @@ export const baseApi = createApi({
     "customerOrdersHistory",
     "myCustomersOrdersHistory",
     "shopsOrdersHistory",
+    "myReviews"
   ],
   endpoints: () => ({}),
 });
