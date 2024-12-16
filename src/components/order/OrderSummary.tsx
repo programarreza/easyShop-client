@@ -1,11 +1,15 @@
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import { ImSpinner6 } from "react-icons/im";
 
 import { applyCoupon } from "@/src/redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 
 const OrderSummary = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
   const [customerProvidedCoupon, setCustomerProvidedCoupon] = useState("");
   const dispatch = useAppDispatch();
   const { totalPrice, grandTotal, discount, selectedItems } = useAppSelector(
@@ -14,6 +18,12 @@ const OrderSummary = () => {
 
   const handleApplyCoupon = () => {
     dispatch(applyCoupon({ couponCode: customerProvidedCoupon }));
+  };
+
+  const handleConfirmOrder = () => {
+    setIsLoading(true);
+
+    router.push("/cart/checkout");
   };
 
   return (
@@ -54,14 +64,20 @@ const OrderSummary = () => {
       </div>
 
       {/* process btn */}
-      <Link href={"/cart/checkout"}>
-        <button
-          className="w-full py-2 my-4 px-6 border rounded-lg hover:bg-gray-200"
-          type="submit"
-        >
-          Confirm Order
-        </button>
-      </Link>
+      <button
+        className="w-full py-2 my-4 px-6 border rounded-lg hover:bg-gray-200"
+        disabled={isLoading}
+        onClick={handleConfirmOrder}
+      >
+        {isLoading ? (
+          <div className="flex w-fit mx-auto">
+            <ImSpinner6 className="animate-spin m-auto" size={28} />
+            <span>Processing...</span>
+          </div>
+        ) : (
+          "Confirm Order"
+        )}
+      </button>
     </div>
   );
 };

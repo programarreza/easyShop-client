@@ -1,5 +1,7 @@
 "use client";
 
+import { ImSpinner6 } from "react-icons/im";
+
 import Container from "@/src/components/ui/Container";
 import ProductCard from "@/src/components/ui/ProductCard";
 import { useGetAllFlashSalesProductsQuery } from "@/src/redux/features/flashSales/flashSales";
@@ -15,21 +17,29 @@ const FlashSalesPage = () => {
           // Full page loader for initial load
           <div className="flex justify-center items-center h-screen">
             <div className="loader flex justify-center items-center ">
+              <ImSpinner6 className="animate-spin m-auto" size={28} />{" "}
               Loading...
             </div>
           </div>
         ) : (
           <>
             {/* Show message if no products available */}
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6  gap-5 py-24 min-h-screen">
-              {flashSalesProducts?.map((flashSalesProduct: any) => (
-                <ProductCard
-                  key={flashSalesProduct.id}
-                  product={flashSalesProduct}
-                />
-              ))}
-            </div>
+            {flashSalesProducts?.length === 0 ? (
+              <p className="flex justify-center items-center min-h-[50vh] my-auto text-xl font-medium">
+                flash sales products not aboailvale
+              </p>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-5 py-24">
+                {flashSalesProducts
+                  ?.slice(0, 6)
+                  .map((flashSalesProduct: any) => (
+                    <ProductCard
+                      key={flashSalesProduct.id}
+                      product={flashSalesProduct}
+                    />
+                  ))}
+              </div>
+            )}
           </>
         )}
       </Container>

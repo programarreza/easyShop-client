@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { FaRegStar, FaStar } from "react-icons/fa6";
 import Rating from "react-rating";
 import { toast } from "sonner";
+import { ImSpinner6 } from "react-icons/im";
 
 import Container from "@/src/components/ui/Container";
 import useLoggedUser from "@/src/hooks/auth.hook";
@@ -20,7 +21,7 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
   const { user, selectedUser } = useLoggedUser();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { data } = useGetSingleProductQuery(searchParams?.id || "");
+  const { data, isLoading } = useGetSingleProductQuery(searchParams?.id || "");
   const product = data?.data;
 
   const discountedPrice =
@@ -44,77 +45,60 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
   return (
     <div className="pt-16">
       <Container>
-        <div className="flex justify-between gap-5">
-          <div className=" flex-1 shadow-large p-3 rounded-md">
-            <Image
-              alt={product?.name}
-              className="w-full h-[80vh] object-cover"
-              height={500}
-              src={product?.images}
-              width={500}
-            />
+        {isLoading ? (
+          <div className="flex justify-center items-center min-h-screen">
+          <div className="flex w-fit mx-auto">
+            <ImSpinner6 className="animate-spin m-auto" size={28} />
+            <span>Loading...</span>
           </div>
-
-          <div className="flex flex-col flex-1 shadow-large p-3 rounded-md">
-            <div className="w-full space-y-4 flex-grow">
-              <p className="text-xl mb-2 mt-1">
-                {product?.name?.length > 150
-                  ? `${product?.name.substring(0, 150)}...`
-                  : product?.name}
-              </p>
-              <p>
-                {product?.description?.length > 330
-                  ? `${product.description.substring(0, 330)}.`
-                  : product?.description}
-              </p>
-
-              {/* rating */}
-              <Rating
-                readonly
-                emptySymbol={<FaRegStar className="text-gray-400" />}
-                fullSymbol={<FaStar className="text-yellow-500" />}
-                initialRating={product?.rating}
+        </div>
+        ) : (
+          <div className="flex justify-between gap-5">
+            <div className=" flex-1 shadow-large p-3 rounded-md">
+              <Image
+                alt={product?.name}
+                className="w-full h-[80vh] object-cover"
+                height={500}
+                src={product?.images}
+                width={500}
               />
+            </div>
 
-              <p>
-                <span className="text-gray-600">Category:</span>{" "}
-                {product?.categories?.name}
-              </p>
-              <p>
-                <span className="text-gray-600">Shop name:</span>{" "}
-                {product?.shop?.name}
-              </p>
+            <div className="flex flex-col flex-1 shadow-large p-3 rounded-md">
+              <div className="w-full space-y-4 flex-grow">
+                <p className="text-xl mb-2 mt-1">
+                  {product?.name?.length > 150
+                    ? `${product?.name.substring(0, 150)}...`
+                    : product?.name}
+                </p>
+                <p>
+                  {product?.description?.length > 330
+                    ? `${product.description.substring(0, 330)}.`
+                    : product?.description}
+                </p>
 
-              {/* price */}
-              <div className="flex gap-6">
-                <div className="flex justify-center items-center">
-                  <svg
-                    className="size-6"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="m8.25 7.5.415-.207a.75.75 0 0 1 1.085.67V10.5m0 0h6m-6 0h-1.5m1.5 0v5.438c0 .354.161.697.473.865a3.751 3.751 0 0 0 5.452-2.553c.083-.409-.263-.75-.68-.75h-.745M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  {product?.discount > 0 ? (
-                    <p className="text-xl">{discountedPrice?.toFixed(0)}</p>
-                  ) : (
-                    <p className="text-xl">{product?.price}</p>
-                  )}
-                </div>
-              </div>
+                {/* rating */}
+                <Rating
+                  readonly
+                  emptySymbol={<FaRegStar className="text-gray-400" />}
+                  fullSymbol={<FaStar className="text-yellow-500" />}
+                  initialRating={product?.rating}
+                />
 
-              {product?.discount ? (
+                <p>
+                  <span className="text-gray-600">Category:</span>{" "}
+                  {product?.categories?.name}
+                </p>
+                <p>
+                  <span className="text-gray-600">Shop name:</span>{" "}
+                  {product?.shop?.name}
+                </p>
+
+                {/* price */}
                 <div className="flex gap-6">
-                  <div className="flex justify-center items-center line-through">
+                  <div className="flex justify-center items-center">
                     <svg
-                      className="size-4"
+                      className="size-6"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="1.5"
@@ -127,45 +111,73 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <p className="text-sm text-gray-700 ">{product?.price}</p>
+                    {product?.discount > 0 ? (
+                      <p className="text-xl">{discountedPrice?.toFixed(0)}</p>
+                    ) : (
+                      <p className="text-xl">{product?.price}</p>
+                    )}
                   </div>
-                  <p className="text-sm text-gray-700">-{product?.discount}%</p>
                 </div>
-              ) : (
-                ""
-              )}
-            </div>
 
-            {/* Button container pinned to the bottom */}
-            <div className="px-2 py-4 mt-auto flex justify-between items-center">
-              {product?.inventoryCount > 0 ? (
-                <Button
-                  className=" py-3 my-4 px-6 border rounded-lg hover:bg-gray-200"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAddToCart(product);
-                  }}
-                >
-                  Add to Cart
-                </Button>
-              ) : (
-                <Button
-                  disabled
-                  className="bg-white text-black font-semibold py-2 px-4 rounded-lg hover:bg-gray-800 hover: transition duration-300 shadow-md hover:shadow-lg hover:text-white"
-                >
-                  Add to Cart
-                </Button>
-              )}
+                {product?.discount ? (
+                  <div className="flex gap-6">
+                    <div className="flex justify-center items-center line-through">
+                      <svg
+                        className="size-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="m8.25 7.5.415-.207a.75.75 0 0 1 1.085.67V10.5m0 0h6m-6 0h-1.5m1.5 0v5.438c0 .354.161.697.473.865a3.751 3.751 0 0 0 5.452-2.553c.083-.409-.263-.75-.68-.75h-.745M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <p className="text-sm text-gray-700 ">{product?.price}</p>
+                    </div>
+                    <p className="text-sm text-gray-700">
+                      -{product?.discount}%
+                    </p>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
 
-              <Link
-                className=" p-2 py-2 my-4 px-2 border rounded-lg hover:bg-gray-200"
-                href={`/shop/details?id=${product?.shop?.id}`}
-              >
-                go to store
-              </Link>
+              {/* Button container pinned to the bottom */}
+              <div className="px-2 py-4 mt-auto flex justify-between items-center">
+                {product?.inventoryCount > 0 ? (
+                  <Button
+                    className=" py-3 my-4 px-6 border rounded-lg hover:bg-gray-200"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAddToCart(product);
+                    }}
+                  >
+                    Add to Cart
+                  </Button>
+                ) : (
+                  <Button
+                    disabled
+                    className="bg-white text-black font-semibold py-2 px-4 rounded-lg hover:bg-gray-800 hover: transition duration-300 shadow-md hover:shadow-lg hover:text-white"
+                  >
+                    Add to Cart
+                  </Button>
+                )}
+
+                <Link
+                  className=" p-2 py-2 my-4 px-2 border rounded-lg hover:bg-gray-200"
+                  href={`/shop/details?id=${product?.shop?.id}`}
+                >
+                  go to store
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </Container>
     </div>
   );

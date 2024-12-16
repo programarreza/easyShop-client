@@ -2,6 +2,7 @@
 import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
 import { useEffect, useState } from "react";
+import { ImSpinner6 } from "react-icons/im";
 
 import { SearchIcon } from "@/src/components/icons";
 import Container from "@/src/components/ui/Container";
@@ -19,7 +20,7 @@ const AllProducts = ({ searchParams }: any) => {
   const [error, setError] = useState<string | null>(null);
   const [total, setTotal] = useState(0);
   const [noProductsMessage, setNoProductsMessage] = useState<string | null>(
-    null
+    null,
   );
   const [filters, setFilters] = useState("");
   const { data } = useGetCategoriesQuery("");
@@ -28,7 +29,7 @@ const AllProducts = ({ searchParams }: any) => {
   const fetchProducts = async (
     page: number,
     pageSize: number,
-    category?: string
+    category?: string,
   ) => {
     setIsLoading(true);
     setError(null);
@@ -36,10 +37,10 @@ const AllProducts = ({ searchParams }: any) => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/products?page=${page}&limit=${pageSize}${
+        `https://easyshopserver.vercel.app/api/v1/products?page=${page}&limit=${pageSize}${
           category ? `&categories=${category}` : ""
         }${searchValue ? `&searchTerm=${searchValue}` : ""}${filters ? `&categories=${filters}` : ""}
-          `
+          `,
       );
 
       if (!res.ok) {
@@ -169,10 +170,10 @@ const AllProducts = ({ searchParams }: any) => {
           </div>
         </div>
         {isLoading && page === 1 ? (
-          // Full page loader for initial load
-          <div className="flex justify-center items-center h-screen">
-            <div className="loader flex justify-center items-center ">
-              Loading...
+          <div className="flex justify-center items-center min-h-[50vh]">
+            <div className="flex w-fit mx-auto">
+              <ImSpinner6 className="animate-spin m-auto" size={28} />
+              <span>Loading...</span>
             </div>
           </div>
         ) : (

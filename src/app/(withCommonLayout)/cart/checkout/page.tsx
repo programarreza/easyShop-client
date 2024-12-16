@@ -214,10 +214,13 @@ const CheckoutPage = () => {
                             }
                           >
                             {isLoading ? (
-                              <ImSpinner6
-                                className="animate-spin m-auto"
-                                size={28}
-                              />
+                              <div className="flex w-fit mx-auto">
+                                <ImSpinner6
+                                  className="animate-spin m-auto"
+                                  size={28}
+                                />
+                                <span>Processing...</span>
+                              </div>
                             ) : (
                               <span className="">Confirm Order</span>
                             )}

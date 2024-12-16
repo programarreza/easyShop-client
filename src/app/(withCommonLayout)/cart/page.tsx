@@ -18,7 +18,7 @@ const Cart = () => {
             <div>
               {products.length &&
                 products.map((product: any) => (
-                  <CartDetails key={product._id} product={product} />
+                  <CartDetails key={product.id} product={product} />
                 ))}
             </div>
             <div>
