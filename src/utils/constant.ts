@@ -71,4 +71,5 @@ export const customerOrdersHistoryDetailsRows = [
   { name: "PRICE", uid: "price" },
   { name: "DISCOUNT", uid: "discount" },
   { name: "GRAND TOTAL", uid: "grand total" },
+  { name: "ACTION", uid: "action" },
 ];

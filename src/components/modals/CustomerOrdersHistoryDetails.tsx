@@ -9,6 +9,7 @@ import {
 import { User } from "@nextui-org/user";
 import { TbCoinTaka } from "react-icons/tb";
 
+import CreateReviewModal from "./CreateReview";
 import RWModal from "./RWModal";
 
 import { customerOrdersHistoryDetailsRows } from "@/src/utils/constant";
@@ -61,6 +62,13 @@ const CustomerOrdersHistoryDetails = ({
                 </TableCell>
                 <TableCell>{item?.discount}%</TableCell>
                 <TableCell>{item?.grandTotal}</TableCell>
+                <TableCell>
+                  <CreateReviewModal
+                    buttonText="create review"
+                    name={item?.product?.name}
+                    productId={item?.productId}
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
