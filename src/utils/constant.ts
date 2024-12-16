@@ -82,3 +82,14 @@ export const myReviewsRows = [
   { name: "REVIEW TEXT", uid: "review text" },
   { name: "DATE", uid: "date" },
 ];
+
+export const myProductReviewsRows = [
+  { name: "SL", uid: "sl" },
+  { name: "IMAGE", uid: "image" },
+  { name: "PRODUCT NAME", uid: "product name" },
+  { name: "RATING", uid: "rating" },
+  { name: "REVIEW TEXT", uid: "review text" },
+  { name: "REVIEW REPLAY", uid: "review replay" },
+  { name: "DATE", uid: "date" },
+  { name: "ACTION", uid: "action" },
+];

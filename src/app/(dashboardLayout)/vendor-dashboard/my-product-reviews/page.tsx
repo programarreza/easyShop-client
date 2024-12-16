@@ -13,8 +13,9 @@ import { FaRegStar, FaStar } from "react-icons/fa6";
 import { ImSpinner6 } from "react-icons/im";
 import Rating from "react-rating";
 
+import ReplayReviewModal from "@/src/components/modals/ReplayReview";
 import { useGetMyProductReviewsQuery } from "@/src/redux/features/review/reviewApi";
-import { myReviewsRows } from "@/src/utils/constant";
+import { myProductReviewsRows } from "@/src/utils/constant";
 
 const MyProductReviewsPage = () => {
   const { data, isLoading } = useGetMyProductReviewsQuery("");
@@ -53,7 +54,7 @@ const MyProductReviewsPage = () => {
               removeWrapper={true}
             >
               <TableHeader className="">
-                {myReviewsRows.map((row) => (
+                {myProductReviewsRows.map((row) => (
                   <TableColumn key={row?.uid} className="">
                     {row?.name}
                   </TableColumn>
@@ -96,7 +97,25 @@ const MyProductReviewsPage = () => {
                         ? `${review?.reviewText.substring(0, 100)}...`
                         : review?.reviewText}
                     </TableCell>
+                    <TableCell>
+                      {review?.reviewReplay ? (
+                        <>
+                          {" "}
+                          {review?.reviewReplay.length > 100
+                            ? `${review?.reviewReplay.substring(0, 100)}...`
+                            : review?.reviewReplay}
+                        </>
+                      ) : (
+                        "No replay"
+                      )}
+                    </TableCell>
                     <TableCell>{formatDate(review?.createdAt)}</TableCell>
+                    <TableCell>
+                      <ReplayReviewModal
+                        reviewId={review?.id}
+                        reviewText={review?.reviewText}
+                      />
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

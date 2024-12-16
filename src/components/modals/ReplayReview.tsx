@@ -7,39 +7,33 @@ import {
 } from "@nextui-org/modal";
 import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import { BsStar, BsStarFill } from "react-icons/bs";
-import Rating from "react-rating";
 import { toast } from "sonner";
 
 import RWForm from "../form/RWForm";
 import RWTextArea from "../form/RWTextArea";
 
-import { useCreateReviewMutation } from "@/src/redux/features/review/reviewApi";
+import { useReplayMyProductReviewMutation } from "@/src/redux/features/review/reviewApi";
 
-const CreateReviewModal = ({
-  buttonText,
-  productId,
-  name,
+const ReplayReviewModal = ({
+  reviewId,
+  reviewText,
 }: {
-  buttonText: string;
-  productId: string;
-  name: string;
+  reviewId: string;
+  reviewText: string;
 }) => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const [createReview] = useCreateReviewMutation();
-  const [rating, setRating] = useState(0);
+  const [reviewReplay] = useReplayMyProductReviewMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Review Creating...");
 
     try {
-      const reviewData = {
-        productId,
-        reviewText: data.reviewText,
-        rating: Number(rating || 0),
+      const reviewReplayData = {
+        reviewId,
+        reviewReplay: data.reviewReplay,
       };
 
-      const res = await createReview(reviewData).unwrap();
+      const res = await reviewReplay(reviewReplayData).unwrap();
 
       if (res.success) {
         onClose();
@@ -56,7 +50,7 @@ const CreateReviewModal = ({
   return (
     <>
       <Button className="" size="sm" onPress={onOpen}>
-        create review
+        replay
       </Button>
       <Modal
         className="bg-white"
@@ -78,40 +72,18 @@ const CreateReviewModal = ({
                           <div className="min-w-[500px]  border rounded-xl px-3">
                             <div className="py-2 text-sm font-semibold">
                               <h3>
-                                {name?.length > 130
-                                  ? `${name.substring(0, 130)}...`
-                                  : name}
+                                {reviewText?.length > 130
+                                  ? `${reviewText.substring(0, 130)}...`
+                                  : reviewText}
                               </h3>
                             </div>
                             <RWForm onSubmit={onSubmit}>
                               <div className="">
                                 <div className="py-1">
-                                  <h2 className="text-sm">Select Rating </h2>
-                                  <Rating
-                                    emptySymbol={
-                                      <BsStar
-                                        className="text-gray-400 hover:text-yellow-400 transition-colors duration-200"
-                                        size={30}
-                                      />
-                                    }
-                                    fractions={2} // Adding fractions manually
-                                    fullSymbol={
-                                      <BsStarFill
-                                        className="text-yellow-400"
-                                        size={30}
-                                      />
-                                    }
-                                    onClick={(value: number) =>
-                                      setRating(value)
-                                    }
-                                    {...({ fractions: 2 } as any)}
-                                  />
-                                </div>
-                                <div className="py-1">
                                   <RWTextArea
                                     required
-                                    label="Review Text"
-                                    name="reviewText"
+                                    label="Review Replay"
+                                    name="reviewReplay"
                                     size="lg"
                                     type="text"
                                   />
@@ -140,4 +112,4 @@ const CreateReviewModal = ({
   );
 };
 
-export default CreateReviewModal;
+export default ReplayReviewModal;

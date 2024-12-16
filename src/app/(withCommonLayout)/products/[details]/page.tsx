@@ -183,7 +183,15 @@ const ProductDetails = ({ searchParams }: { searchParams: TSearchParams }) => {
             </div>
 
             {/* product reviews area */}
-            <ReviewCard reviews={product?.review} />
+            {product?.review?.length === 0 ? (
+              <p className="flex justify-center items-center min-h-[40vh] my-auto text-xl font-medium">
+                Product review not aboailvale
+              </p>
+            ) : (
+              <div className="">
+                <ReviewCard reviews={product?.review} />
+              </div>
+            )}
           </div>
         )}
       </Container>

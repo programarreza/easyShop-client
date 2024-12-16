@@ -29,6 +29,16 @@ export const reviewApi = baseApi.injectEndpoints({
 
       providesTags: ["myProductReviews"],
     }),
+
+    replayMyProductReview: builder.mutation({
+      query: (replayData) => ({
+        url: `/reviews/my-product-reviews/replay`,
+        method: "POST",
+        body: replayData,
+      }),
+
+      invalidatesTags: ["myReviews", "myProductReviews"],
+    }),
   }),
 });
 
@@ -36,4 +46,5 @@ export const {
   useCreateReviewMutation,
   useGetMyReviewsQuery,
   useGetMyProductReviewsQuery,
+  useReplayMyProductReviewMutation,
 } = reviewApi;
