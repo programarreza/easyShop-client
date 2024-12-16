@@ -10,7 +10,18 @@ type Role = keyof typeof roleBasedRoutes;
 const roleBasedRoutes = {
   ADMIN: [/^\/admin-dashboard/, /^\/admin-dashboard\/.*/],
   VENDOR: [/^\/vendor-dashboard/, /^\/vendor-dashboard\/.*/],
-  CUSTOMER: [/^\/dashboard/, /^\/dashboard\/.*/, /^\/cart/],
+  CUSTOMER: [
+    /^\/dashboard/,
+    /^\/dashboard\/my-reviews/,
+    /^\/dashboard\/order-history/,
+    /^\/cart/,
+    /^\/flash-sales/,
+    /^\/payment-failed/,
+    /^\/payment-successful/,
+    /^\/resent-products/,
+    /^\/products/,
+    /^\/shop/,
+  ],
 };
 
 // This function can be marked `async` if using `await` inside
@@ -23,7 +34,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     } else {
       return NextResponse.redirect(
-        new URL(`/login?redirect=${pathname}`, request.url),
+        new URL(`/login?redirect=${pathname}`, request.url)
       );
     }
   }
