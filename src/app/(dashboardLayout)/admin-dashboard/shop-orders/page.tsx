@@ -11,7 +11,7 @@ import {
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { ImSpinner6 } from "react-icons/im";
 
-import CustomerOrdersHistoryDetails from "@/src/components/modals/CustomerOrdersHistoryDetails";
+import ShopsOrdersDetails from "@/src/components/modals/ShopsOrdersDetails";
 import { useGetAllShopsOrdersHistoryQuery } from "@/src/redux/features/order/orderApi";
 import { customerOrdersHistoryRows } from "@/src/utils/constant";
 
@@ -85,7 +85,7 @@ const AllShopsOrdersHistory = () => {
                     <TableCell>{customerOrder?.shop?.name}</TableCell>
                     <TableCell>
                       {/* show all individual product */}
-                      <CustomerOrdersHistoryDetails
+                      <ShopsOrdersDetails
                         buttonText="See details"
                         orderItems={customerOrder?.orderItems}
                       />

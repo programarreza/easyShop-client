@@ -74,6 +74,16 @@ export const customerOrdersHistoryDetailsRows = [
   { name: "ACTION", uid: "action" },
 ];
 
+export const shopsOrdersDetailsRows = [
+  { name: "SL", uid: "sl" },
+  { name: "IMAGE", uid: "image" },
+  { name: "NAME", uid: "name" },
+  { name: "PRICE", uid: "price" },
+  { name: "DISCOUNT", uid: "discount" },
+  { name: "GRAND TOTAL", uid: "grand total" },
+  { name: "QUANTITY", uid: "quantity" },
+];
+
 export const myReviewsRows = [
   { name: "SL", uid: "sl" },
   { name: "IMAGE", uid: "image" },
