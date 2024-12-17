@@ -100,6 +100,7 @@ export const baseApi = createApi({
     "shopsOrdersHistory",
     "myReviews",
     "myProductReviews",
+    "allShop"
   ],
   endpoints: () => ({}),
 });

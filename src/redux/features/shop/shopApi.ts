@@ -39,6 +39,15 @@ export const shopApi = baseApi.injectEndpoints({
 
       invalidatesTags: ["shops"],
     }),
+
+    getAllShops: builder.query({
+      query: () => ({
+        url: `/shops`,
+        method: "GET",
+      }),
+
+      providesTags: ["allShop"],
+    }),
   }),
 });
 
@@ -47,4 +56,5 @@ export const {
   useGetMyShopQuery,
   useUpdateMyShopMutation,
   useGetSingleShopQuery,
+  useGetAllShopsQuery,
 } = shopApi;

@@ -74,6 +74,16 @@ const DashboardSidebar = () => {
                 }
               />
               <Tab
+                key="all shops"
+                title={
+                  <Link href="/admin-dashboard/shops">
+                    <div className="flex items-center space-x-2">
+                      <span>all shops</span>
+                    </div>
+                  </Link>
+                }
+              />
+              <Tab
                 key="all shops order history"
                 title={
                   <Link href="/admin-dashboard/shop-orders">

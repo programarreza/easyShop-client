@@ -103,3 +103,15 @@ export const myProductReviewsRows = [
   { name: "DATE", uid: "date" },
   { name: "ACTION", uid: "action" },
 ];
+
+export const shopsRows = [
+  { name: "SL", uid: "sl" },
+  { name: "LOGO", uid: "logo" },
+  { name: "NAME", uid: "name" },
+  { name: "DESCRIPTION", uid: "description" },
+  { name: "FOLLOWER", uid: "follower" },
+  { name: "STATUS", uid: "status" },
+  { name: "VENDOR NAME", uid: "vendor name" },
+  { name: "VENDOR PHONE", uid: "vendor phone" },
+  { name: "ACTION", uid: "action" }, // status change
+];
