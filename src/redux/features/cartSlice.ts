@@ -3,6 +3,7 @@ import { toast } from "sonner";
 
 const initialState = {
   products: [] as any[],
+  compareProducts: [] as any[],
   selectedItems: 0,
   totalPrice: 0,
   grandTotal: 0,
@@ -22,13 +23,13 @@ const cartSlice = createSlice({
       if (state.products.length === 0) {
         state.products.push({ ...incomingProduct, quantity: 1 });
       } else {
-        const existingShop = state.products[0]?.shop.id;
-        const incomingShop = incomingProduct.shop.id;
+        const existingShop = state.products[0]?.shop?.id;
+        const incomingShop = incomingProduct?.shop?.id;
 
         if (existingShop === incomingShop) {
           // Same shop, add product
           const isExist = state.products.find(
-            (product) => product.id === incomingProduct.id,
+            (product) => product?.id === incomingProduct?.id
           );
 
           if (!isExist) {
@@ -39,14 +40,14 @@ const cartSlice = createSlice({
         } else {
           // Different shop, prompt user
           const confirmClear = window.confirm(
-            "Your cart contains items from another shop. Do you want to clear the cart and add this product?",
+            "Your cart contains items from another shop. Do you want to clear the cart and add this product?"
           );
 
           if (confirmClear) {
             state.products = [{ ...incomingProduct, quantity: 1 }];
           } else {
             toast.error(
-              "Action canceled. Cannot add product from a different shop.",
+              "Action canceled. Cannot add product from a different shop."
             );
           }
         }
@@ -56,6 +57,11 @@ const cartSlice = createSlice({
       state.totalPrice = selectTotalPrice(state);
       state.grandTotal = selectGrandTotal(state);
       state.discount = calculateDiscount(state);
+    },
+
+    setCompareProducts: (state, action) => {
+      // Set compared products in state
+      state.compareProducts = action.payload;
     },
 
     updateQuantity: (state, action) => {
@@ -86,7 +92,7 @@ const cartSlice = createSlice({
 
     removeFromCart: (state, action) => {
       state.products = state.products.filter(
-        (product) => product.id !== action.payload.id,
+        (product) => product.id !== action.payload.id
       );
 
       if (state.products.length === 0) {
@@ -155,7 +161,7 @@ const cartSlice = createSlice({
     viewProduct: (state, action) => {
       const product = action.payload;
       const isAlreadyViewed = state.recentProducts.find(
-        (p) => p.id === product.id,
+        (p) => p.id === product.id
       );
 
       if (!isAlreadyViewed) {
@@ -196,7 +202,7 @@ const calculateDiscount = (state: any) => {
 export const selectSelectedItems = (state: any) =>
   state.products.reduce(
     (total: any, product: any) => total + product.quantity,
-    0,
+    0
   );
 
 export const selectTotalPrice = (state: any) =>
@@ -219,6 +225,7 @@ export const {
   clearCart,
   applyCoupon,
   viewProduct,
+  setCompareProducts,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

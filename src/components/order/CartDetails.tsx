@@ -35,7 +35,7 @@ const CartDetails = ({ product }: { product: any }) => {
       : 0;
 
   return (
-    <div className="">
+    <div className="max-w-[820px]">
       {/* product info */}
       <div className="flex flex-col md:flex-row lg:gap-6 xl:gap-32 items-center border mb-4 justify-between p-2 shadow-md rounded-md bg-white">
         <div className="flex flex-col md:flex-row gap-4 w-full">
@@ -47,9 +47,9 @@ const CartDetails = ({ product }: { product: any }) => {
             width={500}
           />
           <div>
-            <h3 className="text-2xl font-semibold">
-              {product.name.length > 25
-                ? `${product.name.substring(0, 25)}...`
+            <h3 className="text-sm font-semibold">
+              {product.name.length > 100
+                ? `${product.name.substring(0, 100)}...`
                 : product.name}
             </h3>
             <p>

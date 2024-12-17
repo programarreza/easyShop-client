@@ -65,6 +65,14 @@ export const shopApi = baseApi.injectEndpoints({
 
       invalidatesTags: ["myShopProducts"],
     }),
+
+    compareProducts: builder.mutation({
+      query: (productIds) => ({
+        url: `/products/compare`,
+        method: "POST",
+        body: productIds,
+      }),
+    }),
   }),
 });
 
@@ -76,4 +84,5 @@ export const {
   useGetAllProductsQuery,
   useGetSingleProductQuery,
   useGetRelevantProductsMutation,
+  useCompareProductsMutation,
 } = shopApi;
