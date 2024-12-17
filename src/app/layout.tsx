@@ -6,8 +6,9 @@ import clsx from "clsx";
 import { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 
-import { Providers } from "../lib/Providers";
 import { Navbar } from "../components/Home/Navbar/Navbar";
+import ScrollToTopButton from "../components/ui/ScrollToTopButton";
+import { Providers } from "../lib/Providers";
 
 import StoreProvider from "./StoreProvider";
 
@@ -40,7 +41,7 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
@@ -49,6 +50,7 @@ export default function RootLayout({
               <Navbar />
               <Toaster />
               <div className="min-h-screen">{children}</div>
+              <ScrollToTopButton />
             </div>
           </StoreProvider>
         </Providers>

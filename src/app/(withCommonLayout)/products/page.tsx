@@ -19,9 +19,7 @@ const AllProducts = ({ searchParams }: any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [total, setTotal] = useState(0);
-  const [noProductsMessage, setNoProductsMessage] = useState<string | null>(
-    null
-  );
+
   const [filters, setFilters] = useState("");
   const { data } = useGetCategoriesQuery("");
   const categoriesFields = data?.data;
@@ -33,7 +31,6 @@ const AllProducts = ({ searchParams }: any) => {
   ) => {
     setIsLoading(true);
     setError(null);
-    setNoProductsMessage(null);
 
     try {
       const res = await fetch(
@@ -50,11 +47,6 @@ const AllProducts = ({ searchParams }: any) => {
       const data = await res.json();
 
       setTotal(data?.data?.meta?.total);
-
-      // Check if products are available
-      if (data?.data?.data.length === 0) {
-        setNoProductsMessage("No products available for this category.");
-      }
 
       return data?.data?.data;
     } catch (err: any) {
@@ -178,23 +170,19 @@ const AllProducts = ({ searchParams }: any) => {
           </div>
         ) : (
           <>
-            {/* Show message if no products available */}
-            {noProductsMessage ? (
-              <div className="flex justify-center items-center min-h-[80vh]">
-                <p className="text-xl text-red-500">{noProductsMessage}</p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6  gap-5 pb-24 min-h-screen">
-                {contents?.map((product: any) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            )}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6  gap-5 pb-24 min-h-[50vh]">
+              {contents?.map((product: any) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
 
             {isLoading && page > 1 && (
               // Loader at the bottom while loading more content
-              <div className="flex justify-center mt-5">
-                <div className="loader">Loading more projects...</div>
+              <div className="flex justify-center items-center ">
+                <div className="flex w-fit mx-auto">
+                  <ImSpinner6 className="animate-spin m-auto" size={28} />
+                  <span>Loading More Products...</span>
+                </div>
               </div>
             )}
           </>

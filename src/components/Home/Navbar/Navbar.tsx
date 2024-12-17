@@ -91,7 +91,7 @@ export const Navbar = () => {
                     className={clsx(
                       " mt-2", // Default text color set to white
                       linkStyles({ color: "foreground" }),
-                      "data-[active=true]:text-primary data-[active=true]:font-medium",
+                      "data-[active=true]:text-primary data-[active=true]:font-medium"
                     )}
                     color="foreground"
                     href={item.href}
@@ -101,14 +101,19 @@ export const Navbar = () => {
                 </NavbarItem>
               ))}
 
-              <Link href={"/cart"}>
-                <div className="relative mt-2">
-                  <IoCartOutline size={30} />
-                  <span className="rounded-full absolute top-[-8px] left-[20px] bg-transparent border-2 border-green-700 text-black text-center size-2 font-bold flex items-center justify-center p-2">
-                    {selectedItems}
-                  </span>
-                </div>
-              </Link>
+              {(selectedUser?.role as unknown as
+                | "ADMIN"
+                | "VENDOR"
+                | "CUSTOMER") === "CUSTOMER" && (
+                <Link href={"/cart"}>
+                  <div className="relative mt-2">
+                    <IoCartOutline size={30} />
+                    <span className="rounded-full absolute top-[-8px] left-[20px] bg-transparent border-2 border-green-700 text-black text-center size-2 font-bold flex items-center justify-center p-2">
+                      {selectedItems}
+                    </span>
+                  </div>
+                </Link>
+              )}
 
               <Link href={getDashboardLink()}>
                 {selectedUser ? (
