@@ -1,11 +1,11 @@
 "use client";
 import {
-	Table,
-	TableBody,
-	TableCell,
-	TableColumn,
-	TableHeader,
-	TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
 } from "@nextui-org/table";
 import { User } from "@nextui-org/user";
 import { ImSpinner6 } from "react-icons/im";
@@ -18,8 +18,6 @@ const AllShopsPage = () => {
   const { data, isLoading } = useGetAllShopsQuery("");
 
   const shops = data?.data?.data;
-
-  console.log(data?.data?.data);
 
   return (
     <div className="bg-[#F9FBFD]">
@@ -42,9 +40,9 @@ const AllShopsPage = () => {
               className="bg-transparent bg-[#F9FBFD]"
               removeWrapper={true}
             >
-              <TableHeader className="">
+              <TableHeader>
                 {shopsRows.map((row) => (
-                  <TableColumn key={row?.uid} className=" bg-white">
+                  <TableColumn key={row?.uid} className=" bg-white border-b">
                     {row?.name}
                   </TableColumn>
                 ))}
@@ -61,7 +59,7 @@ const AllShopsPage = () => {
                           radius: "sm",
                           src: shop?.logo,
                         }}
-                        className=" "
+                        className=" border"
                         description=""
                         name=""
                       />

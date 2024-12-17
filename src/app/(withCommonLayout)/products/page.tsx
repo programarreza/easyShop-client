@@ -12,7 +12,7 @@ import { useGetCategoriesQuery } from "@/src/redux/features/categories/categorie
 import { TProduct } from "@/src/types";
 
 const AllProducts = ({ searchParams }: any) => {
-  const [searchValue, setSearchValue] = useState(" ");
+  const [searchValue, setSearchValue] = useState("");
   const [contents, setContents] = useState<TProduct[]>([]);
   const [page, setPage] = useState(1);
   const [pageSize] = useState(6);
@@ -32,12 +32,16 @@ const AllProducts = ({ searchParams }: any) => {
     setIsLoading(true);
     setError(null);
 
+    const searchQuery = searchValue ? `&searchTerm=${searchValue}` : "";
+    const filterQuery = filters
+      ? `&categories=${filters}`
+      : category
+        ? `&categories=${category}`
+        : "";
+
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/products?page=${page}&limit=${pageSize}${
-          category ? `&categories=${category}` : ""
-        }${searchValue ? `&searchTerm=${searchValue}` : ""}${filters ? `&categories=${filters}` : ""}
-          `
+        `https://easyshopserver.vercel.app/api/v1/products?page=${page}&limit=${pageSize}${filterQuery}${searchQuery}`
       );
 
       if (!res.ok) {
@@ -62,35 +66,38 @@ const AllProducts = ({ searchParams }: any) => {
         ? String(searchParams?.category)
         : undefined;
 
-      // Check if the category exists and is valid
-      if (category && category !== "undefined") {
-        const newProjects = await fetchProducts(page, pageSize, category);
+      const newProducts = await fetchProducts(page, pageSize, category);
 
-        if (newProjects) {
-          if (page > 1) {
-            setContents((prevData) => [...prevData, ...newProjects]);
-          } else {
-            setContents(newProjects);
-          }
-        }
-      } else {
-        // If no valid category, you can choose to load all products
-        const newProjects = await fetchProducts(page, pageSize);
-
-        if (newProjects) {
-          if (page > 1) {
-            setContents((prevData) => [...prevData, ...newProjects]);
-          } else {
-            setContents(newProjects);
-          }
-        }
+      if (newProducts) {
+        setContents((prevData) =>
+          page > 1 ? [...prevData, ...newProducts] : newProducts
+        );
       }
     };
 
     loadProducts();
-  }, [page, pageSize, searchParams?.category, searchValue, filters]);
+    // Reset the page when search or filters change
+    setPage(1);
+  }, [searchParams?.category, searchValue, filters]);
 
-  // Set up infinite scroll
+  useEffect(() => {
+    if (page > 1) {
+      const loadMoreProducts = async () => {
+        const category = searchParams?.category
+          ? String(searchParams?.category)
+          : undefined;
+
+        const moreProducts = await fetchProducts(page, pageSize, category);
+
+        if (moreProducts) {
+          setContents((prevData) => [...prevData, ...moreProducts]);
+        }
+      };
+
+      loadMoreProducts();
+    }
+  }, [page]);
+
   useInfiniteScroll(page, setPage, total, pageSize);
 
   return (
@@ -170,20 +177,30 @@ const AllProducts = ({ searchParams }: any) => {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6  gap-5 pb-24 min-h-[50vh]">
-              {contents?.map((product: any) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-
-            {isLoading && page > 1 && (
-              // Loader at the bottom while loading more content
-              <div className="flex justify-center items-center ">
+            {contents?.length === 0 ? (
+              <div className="flex justify-center items-center min-h-[50vh]">
                 <div className="flex w-fit mx-auto">
-                  <ImSpinner6 className="animate-spin m-auto" size={28} />
-                  <span>Loading More Products...</span>
+                  <span>Product not found</span>
                 </div>
               </div>
+            ) : (
+              <>
+                {" "}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6  gap-5 pb-24 min-h-[50vh]">
+                  {contents?.map((product: any) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+                {isLoading && page > 1 && (
+                  // Loader at the bottom while loading more content
+                  <div className="flex justify-center items-center ">
+                    <div className="flex w-fit mx-auto">
+                      <ImSpinner6 className="animate-spin m-auto" size={28} />
+                      <span>Loading More Products...</span>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </>
         )}

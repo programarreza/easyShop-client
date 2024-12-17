@@ -6,11 +6,11 @@ import Link from "next/link";
 import useLoggedUser from "@/src/hooks/auth.hook";
 
 const DashboardSidebar = () => {
-  const { selectedUser } = useLoggedUser();
+  const { user, selectedUser } = useLoggedUser();
 
   return (
-    <div>
-      <div className=" w-full min-h-screen ">
+    <div className="w-full">
+      <div className="  min-h-screen text-center">
         <Tabs
           aria-label="Options"
           classNames={{
@@ -122,86 +122,102 @@ const DashboardSidebar = () => {
                   </Link>
                 }
               />
-              <Tab
-                key="create product"
-                title={
-                  <Link href="/vendor-dashboard/create-product">
-                    <div className="flex items-center space-x-2">
-                      <span>create product</span>
+              {user?.shop ? (
+                <>
+                  <Tab
+                    key="create product"
+                    title={
+                      <Link href="/vendor-dashboard/create-product">
+                        <div className="flex items-center space-x-2">
+                          <span>create product</span>
+                        </div>
+                      </Link>
+                    }
+                  />
+                  <Tab
+                    key="my products"
+                    title={
+                      <Link href="/vendor-dashboard/my-products">
+                        <div className="flex items-center space-x-2">
+                          <span>my products</span>
+                        </div>
+                      </Link>
+                    }
+                  />
+                  <Tab
+                    key="create coupon"
+                    title={
+                      <Link href="/vendor-dashboard/create-coupon">
+                        <div className="flex items-center space-x-2">
+                          <span>create coupon</span>
+                        </div>
+                      </Link>
+                    }
+                  />
+                  <Tab
+                    key="my coupon"
+                    title={
+                      <Link href="/vendor-dashboard/my-coupon">
+                        <div className="flex items-center space-x-2">
+                          <span>my coupon</span>
+                        </div>
+                      </Link>
+                    }
+                  />
+                  <Tab
+                    key="create flash sales"
+                    title={
+                      <Link href="/vendor-dashboard/create-flashsales">
+                        <div className="flex items-center space-x-2">
+                          <span>create flash sales</span>
+                        </div>
+                      </Link>
+                    }
+                  />
+                  <Tab
+                    key="flash sales products"
+                    title={
+                      <Link href="/vendor-dashboard/flashsales-products">
+                        <div className="flex items-center space-x-2">
+                          <span> flash sales products</span>
+                        </div>
+                      </Link>
+                    }
+                  />
+                  <Tab
+                    key="order-history"
+                    title={
+                      <Link href="/vendor-dashboard/order-history">
+                        <div className="flex items-center space-x-2">
+                          <span>order history</span>
+                        </div>
+                      </Link>
+                    }
+                  />
+                  <Tab
+                    key="my-product-reviews"
+                    title={
+                      <Link href="/vendor-dashboard/my-product-reviews">
+                        <div className="flex items-center space-x-2">
+                          <span>my product reviews</span>
+                        </div>
+                      </Link>
+                    }
+                  />
+                </>
+              ) : (
+                <Tab
+                  key="no-shop-message"
+                  title={
+                    <div className="flex items-center justify-center w-52">
+                      <span className="w-52 break-words whitespace-normal text-xs text-yellow-600 text-center leading-tight">
+                        First you have to create a shop, then you will get
+                        access to all the remaining routes.
+                      </span>
                     </div>
-                  </Link>
-                }
-              />
-              <Tab
-                key="my products"
-                title={
-                  <Link href="/vendor-dashboard/my-products">
-                    <div className="flex items-center space-x-2">
-                      <span>my products</span>
-                    </div>
-                  </Link>
-                }
-              />
-              <Tab
-                key="create coupon"
-                title={
-                  <Link href="/vendor-dashboard/create-coupon">
-                    <div className="flex items-center space-x-2">
-                      <span>create coupon</span>
-                    </div>
-                  </Link>
-                }
-              />
-              <Tab
-                key="my coupon"
-                title={
-                  <Link href="/vendor-dashboard/my-coupon">
-                    <div className="flex items-center space-x-2">
-                      <span>my coupon</span>
-                    </div>
-                  </Link>
-                }
-              />
-              <Tab
-                key="create flash sales"
-                title={
-                  <Link href="/vendor-dashboard/create-flashsales">
-                    <div className="flex items-center space-x-2">
-                      <span>create flash sales</span>
-                    </div>
-                  </Link>
-                }
-              />
-              <Tab
-                key="flash sales products"
-                title={
-                  <Link href="/vendor-dashboard/flashsales-products">
-                    <div className="flex items-center space-x-2">
-                      <span> flash sales products</span>
-                    </div>
-                  </Link>
-                }
-              />
-              <Tab
-                key="order-history"
-                title={
-                  <Link href="/vendor-dashboard/order-history">
-                    <div className="flex items-center space-x-2">
-                      <span>order history</span>
-                    </div>
-                  </Link>
-                }
-              />
-              <Tab
-                key="my-product-reviews"
-                title={
-                  <Link href="/vendor-dashboard/my-product-reviews">
-                    <div className="flex items-center space-x-2">
-                      <span>my product reviews</span>
-                    </div>
-                  </Link>
-                }
-              />
+                  }
+                />
+              )}
             </>
           )}
 

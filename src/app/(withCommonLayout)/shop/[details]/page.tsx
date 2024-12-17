@@ -34,7 +34,7 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/products/${searchParams?.id}/shop-product?page=${page}&limit=${pageSize}${
+        `https://easyshopserver.vercel.app/api/v1/products/${searchParams?.id}/shop-product?page=${page}&limit=${pageSize}${
           category ? `&categories=${category}` : ""
         }`
       );

@@ -95,7 +95,7 @@ const CategoriesPage = () => {
             >
               <TableHeader className="">
                 {categoriesRows?.map((row) => (
-                  <TableColumn key={row?.uid} className=" bg-white">
+                  <TableColumn key={row?.uid} className=" bg-white border-b">
                     {row?.name}
                   </TableColumn>
                 ))}
@@ -103,7 +103,7 @@ const CategoriesPage = () => {
 
               <TableBody className="bg-white">
                 {categories?.map((category: TCategories, index: number) => (
-                  <TableRow key={category?.id} className="bg-white">
+                  <TableRow key={category?.id} className="bg-white border-b">
                     <TableCell width={20}>{index + 1}</TableCell>
                     <TableCell>
                       <User

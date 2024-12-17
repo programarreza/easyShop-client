@@ -79,7 +79,7 @@ const UsersPage = () => {
             >
               <TableHeader className="">
                 {usersRows.map((row) => (
-                  <TableColumn key={row?.uid} className=" bg-white">
+                  <TableColumn key={row?.uid} className=" bg-white border-b">
                     {row?.name}
                   </TableColumn>
                 ))}

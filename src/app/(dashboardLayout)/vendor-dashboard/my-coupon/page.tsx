@@ -81,15 +81,15 @@ const MyCouponPage = () => {
               className="bg-transparent bg-[#F9FBFD]"
               removeWrapper={true}
             >
-              <TableHeader className="">
+              <TableHeader className=" ">
                 {couponRows.map((row) => (
-                  <TableColumn key={row?.uid} className=" bg-white">
+                  <TableColumn key={row?.uid} className=" bg-white border-b">
                     {row?.name}
                   </TableColumn>
                 ))}
               </TableHeader>
 
-              <TableBody className="bg-white">
+              <TableBody className="bg-white border-b">
                 <TableRow key={couponData?.id} className="bg-white">
                   <TableCell>{user?.shop?.name}</TableCell>
                   <TableCell>{couponData?.code}</TableCell>

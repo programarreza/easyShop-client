@@ -7,7 +7,6 @@ import { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 
 import { Navbar } from "../components/Home/Navbar/Navbar";
-import ScrollToTopButton from "../components/ui/ScrollToTopButton";
 import { Providers } from "../lib/Providers";
 
 import StoreProvider from "./StoreProvider";
@@ -50,7 +49,6 @@ export default function RootLayout({
               <Navbar />
               <Toaster />
               <div className="min-h-screen">{children}</div>
-              <ScrollToTopButton />
             </div>
           </StoreProvider>
         </Providers>

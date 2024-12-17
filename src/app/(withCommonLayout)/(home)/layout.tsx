@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
 
+import Footer from "@/src/components/ui/Footer";
+import ScrollToTopButton from "@/src/components/ui/ScrollToTopButton";
+
 const CommonLayout = ({
   children,
   banner,
@@ -20,6 +23,8 @@ const CommonLayout = ({
       {categories}
       {relevantProducts}
       {children}
+      <ScrollToTopButton />
+      <Footer />
     </div>
   );
 };
