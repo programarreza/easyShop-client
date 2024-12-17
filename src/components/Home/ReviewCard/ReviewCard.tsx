@@ -34,13 +34,15 @@ const ReviewCard = ({ reviews }: { reviews: any[] }) => {
             </div>
 
             {/* replay */}
-            <div className="border py-2 rounded-lg bg-gray-200 pl-2">
-              <div className="text-green-600 flex items-center">
-                <AiFillShop />
-                <p>vendor response</p>
+            {review?.reviewReplay && (
+              <div className="border py-2 rounded-lg bg-gray-200 pl-2">
+                <div className="text-green-600 flex items-center">
+                  <AiFillShop />
+                  <p>vendor response</p>
+                </div>
+                <p>{review?.reviewReplay}</p>
               </div>
-              <p>{review?.reviewReplay}</p>
-            </div>
+            )}
           </div>
         ))}
       </div>
