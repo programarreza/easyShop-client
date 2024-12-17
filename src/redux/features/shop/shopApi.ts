@@ -48,6 +48,16 @@ export const shopApi = baseApi.injectEndpoints({
 
       providesTags: ["allShop"],
     }),
+
+    shopStatusChange: builder.mutation({
+      query: (args) => ({
+        url: `/shops/status/${args.shopId}`,
+        method: "PATCH",
+        body: args.status,
+      }),
+
+      invalidatesTags: ["allShop"],
+    }),
   }),
 });
 
@@ -57,4 +67,5 @@ export const {
   useUpdateMyShopMutation,
   useGetSingleShopQuery,
   useGetAllShopsQuery,
+  useShopStatusChangeMutation,
 } = shopApi;

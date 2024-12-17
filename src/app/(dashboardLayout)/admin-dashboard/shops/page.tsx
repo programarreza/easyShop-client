@@ -1,11 +1,11 @@
 "use client";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
+	Table,
+	TableBody,
+	TableCell,
+	TableColumn,
+	TableHeader,
+	TableRow,
 } from "@nextui-org/table";
 import { User } from "@nextui-org/user";
 import { ImSpinner6 } from "react-icons/im";

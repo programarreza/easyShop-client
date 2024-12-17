@@ -6,12 +6,11 @@ import {
   useDisclosure,
 } from "@nextui-org/modal";
 import { Select, SelectItem } from "@nextui-org/select";
-import Image from "next/image";
 import { useState } from "react";
+import { FaShopSlash } from "react-icons/fa6";
 import { toast } from "sonner";
 
-import statusChangeIcon from "@/src/assets/images/block_status.png";
-import { useStatusChangeMutation } from "@/src/redux/features/user/userApi";
+import { useShopStatusChangeMutation } from "@/src/redux/features/shop/shopApi";
 
 const statusFiled = [
   { key: "ACTIVE", label: "Active" },
@@ -21,7 +20,7 @@ const statusFiled = [
 const ShopStatusChangeModal = ({ status, shopId }: any) => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [selectedValue, setSelectedValue] = useState([status]);
-  const [changeStatus] = useStatusChangeMutation();
+  const [shopStatusChange] = useShopStatusChangeMutation();
 
   const handleStatusChange = async () => {
     const toastId = toast.loading("status updating...");
@@ -33,10 +32,10 @@ const ShopStatusChangeModal = ({ status, shopId }: any) => {
 
     const args = {
       status: updatedStatus,
-      shopId
+      shopId,
     };
 
-    const res = await changeStatus(args).unwrap();
+    const res = await shopStatusChange(args).unwrap();
 
     if (res?.success) {
       toast.success(res?.message, { id: toastId, duration: 1000 });
@@ -47,12 +46,7 @@ const ShopStatusChangeModal = ({ status, shopId }: any) => {
   return (
     <>
       <Button className="bg-transparent " size="sm" onPress={onOpen}>
-        <Image
-          alt="status change icon"
-          height={30}
-          src={statusChangeIcon}
-          width={30}
-        />
+        <FaShopSlash size={50} />
       </Button>
       <Modal
         className="bg-white"
