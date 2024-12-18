@@ -17,8 +17,8 @@ import Container from "@/src/components/ui/Container";
 const Banner = () => {
   return (
     <Container>
-      <div className="flex gap-2">
-        <div className="h-[450px] w-[860px] pt-12 flex ">
+      <div className="flex flex-col lg:flex-row gap-2">
+        <div className="h-[450px] lg:w-[570px] xl:w-[860px] pt-12 flex ">
           <Swiper
             autoplay={{
               delay: 4500,
