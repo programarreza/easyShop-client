@@ -9,6 +9,12 @@ A robust multi-vendor e-commerce platform where vendors can manage their shops, 
 - **Frontend Deployment:** [Live Frontend URL](https://easyshopclient.vercel.app)
 - **Backend Deployment:** [Live Backend URL](https://easyshopserver.vercel.app)
 
+## User Info
+- **admin@gmail.com**
+- **vendor@gmail.com**
+- **customer@gmail.com**
+- **pass: 123456**
+
 ---
 
 ## Technology Stack & Packages
