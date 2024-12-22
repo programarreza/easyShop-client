@@ -10,6 +10,7 @@ import ProductCard from "@/src/components/ui/ProductCard";
 import useInfiniteScroll from "@/src/hooks/infinityScroll";
 import { useGetCategoriesQuery } from "@/src/redux/features/categories/categoriesApi";
 import { TProduct } from "@/src/types";
+import envConfig from "@/src/config/envConfig";
 
 const AllProducts = ({ searchParams }: any) => {
   const [searchValue, setSearchValue] = useState("");
@@ -41,7 +42,7 @@ const AllProducts = ({ searchParams }: any) => {
 
     try {
       const res = await fetch(
-        `https://easyshopserver.vercel.app/api/v1/products?page=${page}&limit=${pageSize}${filterQuery}${searchQuery}`
+        `${envConfig.baseApi}/products?page=${page}&limit=${pageSize}${filterQuery}${searchQuery}`
       );
 
       if (!res.ok) {

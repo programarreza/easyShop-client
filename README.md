@@ -1,35 +1,42 @@
 # Project Name: Easy Shop
 
 ## Project Description
+
 A robust multi-vendor e-commerce platform where vendors can manage their shops, products, and orders, while customers can browse, compare, and purchase products efficiently. Admins have full control over monitoring and managing platform operations.
 
 ---
 
 ## Live URL
+
 - **Frontend Deployment:** [Live Frontend URL](https://easyshopclient.vercel.app)
 - **Backend Deployment:** [Live Backend URL](https://easyshopserver.vercel.app)
 
 ---
 
 ## Technology Stack & Packages
+
 ### **Backend**
+
 - **Node.js** & **Express.js** - Server & API management
 - **Prisma** - Database
 - **JWT** - Authentication
 - **Cloudinary** - Image storage
-- **TypeScript** *(Optional)* - Strong typing for maintainable code
+- **TypeScript** _(Optional)_ - Strong typing for maintainable code
 
 ### **Frontend**
+
 - **Next.js** - Frontend framework
 - **Redux Toolkit** - State management
 - **Tailwind CSS** - Styling
 - **Aamarpay/Stripe** - Payment integration
-- **TypeScript** *(Optional)* - Strong typing
+- **TypeScript** _(Optional)_ - Strong typing
 
 ---
 
 ## Setup Instructions
+
 ### **Backend**
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/programarreza/easyShop-server.git
@@ -53,6 +60,7 @@ A robust multi-vendor e-commerce platform where vendors can manage their shops, 
    ```
 
 ### **Frontend**
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/programarreza/easyShop-client.git
@@ -76,20 +84,25 @@ A robust multi-vendor e-commerce platform where vendors can manage their shops, 
 ---
 
 ## Key Features & Functionality
+
 ### **Roles and Responsibilities**
+
 #### Admin
+
 - Full control over platform monitoring and moderation.
 - Manage users (vendors/customers), suspend accounts, and blacklist shops.
 - Dynamically manage product categories.
 - Monitor transactions and activities.
 
 #### Vendor
+
 - Create and manage a shop (name, logo, description, etc.).
 - Add, duplicate, or update products with details like name, price, category, and inventory.
 - Manage product inventory and order history.
 - Respond to customer reviews.
 
 #### User (Customer)
+
 - Browse and filter products across vendor shops.
 - Add products to the cart and make purchases.
 - Leave reviews and ratings for purchased products.
@@ -99,6 +112,7 @@ A robust multi-vendor e-commerce platform where vendors can manage their shops, 
 ---
 
 ### **Main Features**
+
 - **Home Page:** Infinite scrolling, product filtering, followed shop prioritization.
 - **Product Details Page:** Product information, related products, and reviews.
 - **Shop Page:** Vendor shop details, follower counts, and product management.
@@ -114,6 +128,5 @@ A robust multi-vendor e-commerce platform where vendors can manage their shops, 
 ---
 
 ## Known Issues/Bugs
+
 - None currently reported.
-
-

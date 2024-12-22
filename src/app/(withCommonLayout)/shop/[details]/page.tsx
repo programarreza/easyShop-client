@@ -1,11 +1,14 @@
 "use client";
+import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ImSpinner6 } from "react-icons/im";
 
 import Container from "@/src/components/ui/Container";
 import ProductCard from "@/src/components/ui/ProductCard";
+import envConfig from "@/src/config/envConfig";
 import useInfiniteScroll from "@/src/hooks/infinityScroll";
+import { useCreateFollowMutation } from "@/src/redux/features/followed/followedApi";
 import { useGetSingleShopQuery } from "@/src/redux/features/shop/shopApi";
 import { TProduct, TSearchParams } from "@/src/types";
 
@@ -16,6 +19,8 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [total, setTotal] = useState(0);
+
+  const [createFollow] = useCreateFollowMutation();
 
   // get shop data
   const { data, isLoading: shopLoading } = useGetSingleShopQuery(
@@ -34,7 +39,7 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
 
     try {
       const res = await fetch(
-        `https://easyshopserver.vercel.app/api/v1/products/${searchParams?.id}/shop-product?page=${page}&limit=${pageSize}${
+        `${envConfig.baseApi}/products/${searchParams?.id}/shop-product?page=${page}&limit=${pageSize}${
           category ? `&categories=${category}` : ""
         }`
       );
@@ -105,6 +110,12 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
     return new Date(date).toLocaleDateString("en-US", options);
   };
 
+  const handleFollow = () => {
+    createFollow({
+      shopId: searchParams?.id,
+    });
+  };
+
   return (
     <div className=" m-2 bg-[#F2F4F8]">
       <Container>
@@ -140,7 +151,14 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
                       Followers: {shopData?.followerCount}
                     </p>
                   </div>
-                  <div className="border p-2">Follow/unFollow</div>
+                  <div className="border p-2">
+                    <Button
+                      className="py-3 my-4 px-6 border rounded-lg hover:bg-gray-200"
+                      onClick={handleFollow}
+                    >
+                      Follow
+                    </Button>
+                  </div>
                 </div>
 
                 {/* coupon info */}

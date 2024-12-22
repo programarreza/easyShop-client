@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { logout, setUser } from "../features/auth/authSlice";
 import { RootState } from "../store/store";
 
+import envConfig from "@/src/config/envConfig";
 import { setCookie } from "@/src/utils/cookiesUtils";
 
 interface ErrorResponse {
@@ -21,7 +22,7 @@ interface ErrorResponse {
 }
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://easyshopserver.vercel.app/api/v1",
+  baseUrl: `${envConfig.baseApi}`,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
@@ -53,13 +54,10 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     // Send Refresh Token
     console.log("Sending refresh token");
 
-    const res = await fetch(
-      "https://easyshopserver.vercel.app/api/v1/auth/refresh-token",
-      {
-        method: "POST",
-        credentials: "include",
-      }
-    );
+    const res = await fetch(`${envConfig.baseApi}/auth/refresh-token`, {
+      method: "POST",
+      credentials: "include",
+    });
 
     const data = await res.json();
 
