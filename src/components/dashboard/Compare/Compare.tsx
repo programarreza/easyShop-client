@@ -53,7 +53,7 @@ const Compare = () => {
   };
 
   return (
-    <div className=" w-full flex justify-center py-16">
+    <div className=" w-full flex justify-center pt-16">
       {/* Form area */}
       <div className="w-full lg:w-[350px] bg-white rounded-xl px-2 shadow-lg">
         <div className="text-center py-4 text-2xl font-semibold">

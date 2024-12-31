@@ -53,7 +53,7 @@ const CustomerOrderHistoryPage = () => {
             >
               <TableHeader className="">
                 {customerOrdersHistoryRows.map((row) => (
-                  <TableColumn key={row?.uid} className="">
+                  <TableColumn key={row?.uid} className="border-b">
                     {row?.name}
                   </TableColumn>
                 ))}

@@ -90,7 +90,7 @@ const MyCouponPage = () => {
               </TableHeader>
 
               <TableBody className="bg-white border-b">
-                <TableRow key={couponData?.id} className="bg-white">
+                <TableRow key={couponData?.id} className="bg-white border-b">
                   <TableCell>{user?.shop?.name}</TableCell>
                   <TableCell>{couponData?.code}</TableCell>
                   <TableCell>{couponData?.discount}%</TableCell>

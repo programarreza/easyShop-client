@@ -78,15 +78,15 @@ const UsersPage = () => {
             >
               <TableHeader className="">
                 {myShopProductsRows.map((row) => (
-                  <TableColumn key={row?.uid} className=" bg-white">
+                  <TableColumn key={row?.uid} className=" bg-white ">
                     {row?.name}
                   </TableColumn>
                 ))}
               </TableHeader>
 
-              <TableBody className="bg-white">
+              <TableBody className="bg-white ">
                 {products?.map((product: any, index: number) => (
-                  <TableRow key={product?.id} className="bg-white">
+                  <TableRow key={product?.id} className="bg-white  border-b">
                     <TableCell>
                       <User
                         avatarProps={{

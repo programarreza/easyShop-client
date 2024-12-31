@@ -76,16 +76,16 @@ const Footer = () => {
               <div className="space-y-8">
                 <h2 className=" flex items-center gap-2">
                   <HiOutlineMail size={25} />
-                  <span>fayjulkarim2@gmail.com</span>
+                  <span>easyshop@gmail.com</span>
                 </h2>
                 <h2 className=" flex items-center gap-2">
                   <FaPhoneAlt size={20} />
-                  <span>01721-880383</span>
+                  <span>01721-125445</span>
                 </h2>
                 <h2 className=" flex  gap-2">
                   <FiClock size={25} />
                   <div>
-                    <p>Saturday href Wednesday: 9:00 AM – 6:00 PM </p>
+                    <p>24/7 support </p>
                   </div>
                 </h2>
               </div>

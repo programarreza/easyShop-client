@@ -91,7 +91,7 @@ const FlashSalesProducts = () => {
             >
               <TableHeader className="">
                 {myFlashSalesProductsRows.map((row) => (
-                  <TableColumn key={row?.uid} className=" bg-white">
+                  <TableColumn key={row?.uid} className=" bg-white border-b">
                     {row?.name}
                   </TableColumn>
                 ))}
@@ -99,7 +99,7 @@ const FlashSalesProducts = () => {
 
               <TableBody className="bg-white">
                 {flashSalesProducts?.map((product: any, index: number) => (
-                  <TableRow key={product?.id} className="bg-white">
+                  <TableRow key={product?.id} className="bg-white border-b">
                     <TableCell>
                       <User
                         avatarProps={{

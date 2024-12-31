@@ -15,7 +15,7 @@ const FlashSalesSection = () => {
     <div className="min-h-[50vh] m-1 bg-[#F2F4F8]">
       <Container>
         <div>
-          <div className="text-center border-b w-full  text-2xl py-8 flex justify-between items-center">
+          <div className="text-center border-b w-full  text-xl py-0 flex justify-between items-center">
             <p>Flash Sales</p>
             <Link href={"/flash-sales"}>
               <button

@@ -106,7 +106,7 @@ const MyProductReviewsPage = () => {
                             : review?.reviewReplay}
                         </>
                       ) : (
-                        "No replay"
+                        <p className="text-red-500">No replay</p>
                       )}
                     </TableCell>
                     <TableCell>{formatDate(review?.createdAt)}</TableCell>
