@@ -5,11 +5,15 @@ import { ImSpinner6 } from "react-icons/im";
 
 import Container from "@/src/components/ui/Container";
 import ProductCard from "@/src/components/ui/ProductCard";
-import { useGetRelevantProductsMutation } from "@/src/redux/features/product/productApi";
+import {
+  useGetAllProductsQuery,
+  useGetRelevantProductsMutation,
+} from "@/src/redux/features/product/productApi";
 import { useAppSelector } from "@/src/redux/hooks";
 
 const RelevantProducts = () => {
   const { recentProducts } = useAppSelector((store) => store.cart);
+  const { data: productDate } = useGetAllProductsQuery("");
   const [getRelevantData, { data, isLoading }] =
     useGetRelevantProductsMutation();
 
@@ -24,14 +28,20 @@ const RelevantProducts = () => {
     }
   }, [recentProducts, getRelevantData]);
 
-  const relevantProducts = data?.data;
+  let relevantProducts;
+
+  if (data?.data) {
+    relevantProducts = data?.data;
+  } else {
+    relevantProducts = productDate?.data?.data;
+  }
 
   return (
     <div>
       <div className="min-h-[50vh] m-1  bg-[#F2F4F8]">
         <Container>
           <h2 className="text-center border-b w-fit  text-2xl py-8">
-            Related productsd
+            Related products
           </h2>
           {isLoading ? (
             // Full page loader for initial load

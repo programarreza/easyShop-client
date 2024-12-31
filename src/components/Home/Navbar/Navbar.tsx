@@ -96,7 +96,7 @@ export const Navbar = () => {
             </NextLink>
 
             {/* search by content */}
-            <div className="min-w-[550px] mx-auto my-4">
+            <div className="min-w-[260px] md:min-w-[550px] mx-auto my-4">
               <Input
                 classNames={{
                   label: "text-black/50 dark:text-white/90",
