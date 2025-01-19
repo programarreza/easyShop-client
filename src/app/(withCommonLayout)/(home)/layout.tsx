@@ -9,12 +9,14 @@ const CommonLayout = ({
   categories,
   flashSales,
   relevantProducts,
+  subscribe,
 }: {
   children: ReactNode;
   banner: ReactNode;
   flashSales: ReactNode;
   categories: ReactNode;
   relevantProducts: ReactNode;
+  subscribe: ReactNode;
 }) => {
   return (
     <div>
@@ -23,6 +25,7 @@ const CommonLayout = ({
       {categories}
       {relevantProducts}
       {children}
+      {subscribe}
       <ScrollToTopButton />
       <Footer />
     </div>
