@@ -24,7 +24,7 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
 
   // get shop data
   const { data, isLoading: shopLoading } = useGetSingleShopQuery(
-    searchParams?.id
+    searchParams?.id,
   );
   const shopData = data?.data;
   const couponData = shopData?.coupon;
@@ -32,7 +32,7 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
   const fetchProducts = async (
     page: number,
     pageSize: number,
-    category?: string
+    category?: string,
   ) => {
     setIsLoading(true);
     setError(null);
@@ -41,7 +41,7 @@ const ShopDetailsPage = ({ searchParams }: { searchParams: TSearchParams }) => {
       const res = await fetch(
         `${envConfig.baseApi}/products/${searchParams?.id}/shop-product?page=${page}&limit=${pageSize}${
           category ? `&categories=${category}` : ""
-        }`
+        }`,
       );
 
       if (!res.ok) {

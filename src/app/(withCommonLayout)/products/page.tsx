@@ -93,8 +93,7 @@ const AllProducts = ({ searchParams }: any) => {
     };
 
     loadProducts();
-    setPage(1); // Reset the page when filters change
-  }, [searchParams?.category, search, filters, priceRange]);
+  }, [page]);
 
   useInfiniteScroll(page, setPage, total, pageSize);
 
@@ -185,7 +184,7 @@ const AllProducts = ({ searchParams }: any) => {
             )}
 
             {isLoading && page > 1 && (
-              <div className="flex justify-center items-center">
+              <div className="flex w-fit mx-auto">
                 <ImSpinner6 className="animate-spin m-auto" size={28} />
                 <span>Loading More Products...</span>
               </div>

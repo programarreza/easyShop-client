@@ -69,7 +69,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
           setUser({
             user,
             token: data.data.accessToken,
-          })
+          }),
         );
         result = await baseQuery(args, api, extraOptions);
       } else {

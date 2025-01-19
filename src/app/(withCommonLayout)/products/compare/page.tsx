@@ -14,7 +14,7 @@ import { useAppDispatch } from "@/src/redux/hooks";
 
 const ComparePage = () => {
   const compareProducts = useSelector(
-    (state: any) => state.cart.compareProducts
+    (state: any) => state.cart.compareProducts,
   );
 
   const { user, selectedUser } = useLoggedUser();

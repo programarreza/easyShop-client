@@ -5,7 +5,6 @@ import {
   ModalContent,
   useDisclosure,
 } from "@nextui-org/modal";
-import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
